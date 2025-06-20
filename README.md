@@ -12,8 +12,8 @@ This is a gamified cybersecurity and digital forensics learning website.
 ## Setup Instructions
 
 1. Clone this repository
-2. Run `npm install`
-3. Run ``npm Intall Bootstrap`
+2. Run `npm init`
+3. Run `npm intall Bootstrap`
 
 ## Project Team
 
