@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CyberSleuth Academy - Phishing Lab</title>
+
+    <!-- Bootstrap & Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- NAVIGATION BAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <!-- Bootstrap Alert Area -->
+        <div id="alertArea" class="container position-fixed top-0 start-50 translate-middle-x mt-3"
+            style="z-index: 1055; max-width: 600px;"></div>
+
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <i class="fas fa-shield-alt me-2"></i>CyberSleuth Academy
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-home me-1"></i> Dashboard</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-book me-1"></i> Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-trophy me-1"></i>
+                            Achievements</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-cog me-1"></i> Settings
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                    data-bs-target="#difficultyModal">
+                                    <i class="fas fa-sliders-h me-2"></i>Difficulty Level</a></li>
+                            <!-- <li><a class="dropdown-item" href="#" onclick="resetProgress()"> -->
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#resetModal">
+                                    <i class="fas fa-redo me-2"></i>Reset Progress</a></li>
+
+                            <li>
+                                <div class="dropdown-item d-flex align-items-center" onclick="event.stopPropagation();">
+                                    <span class="me-2"><i class="fas fa-moon"></i> Dark Mode</span>
+                                    <label class="theme-toggle ms-auto">
+                                        <input type="checkbox" id="darkModeToggle">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="container py-4">
+        <div class="row mb-4 align-items-center">
+            <div class="col-md-8">
+                <h1 class="mb-3"><i class="fas fa-envelope-open-text me-2"></i>Phishing Forensics Lab</h1>
+                <p class="lead">Analyze real-world phishing attacks through 8 interactive forensic tasks. Earn points,
+                    badges, and enhance your cybersecurity skills.</p>
+                <div class="d-flex align-items-center mb-3">
+                    <div class="badge bg-primary me-2"><i class="fas fa-clock me-1"></i> 45 mins</div>
+                    <div id="difficultyBadge" class="badge bg-warning">
+                        <i class="fas fa-graduation-cap me-1"></i> Intermediate
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 text-end">
+                <div class="points-badge-bar px-4 py-2 d-inline-block border rounded-pill">
+                    <span id="pointsDisplay" style="font-weight: bold; color: #000;">0</span>
+                    <span style="color: #000;">points</span> |
+                    <span id="badgesDisplay">No badges</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROGRESS BAR -->
+        <div class="mb-4">
+            <!-- Hint Counter (only for Intermediate) -->
+            <!-- <div id="hintCounterDisplay" class="mb-3" style="display: none;">
+                <div class="d-inline-flex align-items-center px-3 py-1 rounded-pill shadow-sm hint-counter-box">
+                    <i class="fas fa-lightbulb me-2 text-warning fs-5"></i>
+                    <span class="hint-counter-text">Hints used:</span>
+                    <span class="hint-counter-text mx-1" id="usedHintCount">0</span>
+                    <span class="hint-counter-text">/</span>
+                    <span class="hint-counter-text ms-1" id="maxHintCount">0</span>
+                </div>
+            </div> -->
+            <!-- ✅ Container that aligns both horizontally -->
+            <div class="mb-3 d-flex align-items-center gap-3 flex-wrap">
+
+                <!-- ✅ 🔥 Answer Streak (always visible) -->
+                <!-- <div id="streakBox" class="d-inline-flex align-items-center px-3 py-1 rounded-pill shadow-sm"
+                    style="background-color: #fff3cd; color: #856404;">
+                    <i class="fas fa-fire me-2 text-danger fs-5"></i>
+                    <span class="fw-semibold">Answer Streak:</span>
+                    <span id="currentStreak" class="ms-2 fw-bold">0</span>
+                </div> -->
+                <div id="streakBox" class="d-inline-flex align-items-center px-3 py-1 rounded-pill shadow-sm">
+                    <i class="fas fa-fire me-2 text-warning fs-5"></i> <!-- 🔥 Orange -->
+                    <span class="fw-semibold">Answer Streak:</span>
+                    <span id="currentStreak" class="ms-2 fw-bold">0</span>
+                </div>
+
+                <!-- ✅ 💡 Hint Counter (Intermediate only) -->
+                <div id="hintCounterDisplay" style="display: none;">
+                    <div class="d-inline-flex align-items-center px-3 py-1 rounded-pill shadow-sm hint-counter-box">
+                        <i class="fas fa-lightbulb me-2 text-warning fs-5"></i>
+                        <span class="hint-counter-text">Hints used:</span>
+                        <span class="hint-counter-text mx-1" id="usedHintCount">0</span>
+                        <span class="hint-counter-text">/</span>
+                        <span class="hint-counter-text ms-1" id="maxHintCount">0</span>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="d-flex justify-content-between mb-2">
+                <span class="fw-bold">Progress</span>
+                <span id="progressText">0% Complete</span>
+            </div>
+            <div class="progress position-relative">
+                <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                    style="width: 0%"></div>
+                <div class="progress-label">Step 0 of 8</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="accordion" id="tasksAccordion"></div>
+            </div>
+            <div class="col-lg-4">
+                <div class="tool-card position-sticky" style="top: calc(4rem + 1rem);">
+                    <h4 class="mb-3"><i class="fas fa-tools me-2"></i>Forensic Toolkit</h4>
+
+                    <!-- Email Inspector -->
+                    <div class="mb-4">
+                        <h6><i class="fas fa-envelope me-1"></i>Email Inspector</h6>
+                        <div class="inspector-box border p-3 rounded small mb-2">
+                            <strong>From:</strong> "Amazon Security" &lt;security@amaz0n-support.com&gt;<br>
+                            <strong>Subject:</strong> Urgent: Suspicious Activity Detected!<br>
+                            <p>Dear customer, we detected unusual login attempts. Please verify immediately.</p>
+                            <a href="#" id="phishingLink">https://amaz0n-verify.com/secure</a><br>
+                            <span><i class="fas fa-paperclip me-1"></i>invoice_URGENT.zip</span>
+                        </div>
+                        <button class="btn btn-sm btn-outline-primary w-100" onclick="analyzeEmail()">
+                            <i class="fas fa-search me-1"></i> Analyze Email
+                        </button>
+                        <div id="emailAnalysisResult" class="mt-2 small"></div>
+                    </div>
+
+                    <!-- WHOIS Lookup -->
+                    <div class="mb-4">
+                        <h6><i class="fas fa-globe me-1"></i>Domain WHOIS</h6>
+                        <div class="input-group mb-2">
+                            <input type="text" id="domainInput" class="form-control" placeholder="Enter domain...">
+                            <button class="btn btn-outline-secondary" onclick="lookupDomain()"><i
+                                    class="fas fa-search"></i></button>
+                        </div>
+                        <div id="whoisResult" class="small text-muted"></div>
+                    </div>
+
+                    <!-- File Scanner -->
+                    <div>
+                        <h6><i class="fas fa-file-alt me-1"></i>File Scanner</h6>
+                        <div class="input-group mb-2">
+                            <input type="text" id="fileInput" class="form-control" placeholder="Enter file name...">
+                            <button class="btn btn-outline-secondary" onclick="scanFile()"><i
+                                    class="fas fa-bug"></i></button>
+                        </div>
+                        <div id="fileScanResult" class="small text-muted"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Difficulty Modal -->
+
+    <!-- Difficulty Modal -->
+    <!-- <div class="modal fade" id="difficultyModal" tabindex="-1"> -->
+    <div class="modal fade settings-modal" id="difficultyModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Choose Difficulty</h5>
+                </div>
+                <div class="modal-body">
+                    <!-- <select id="difficultySelect" class="form-select mb-3">
+                        <option value="Easy">Easy</option>
+                        <option value="Intermediate" selected>Intermediate</option>
+                        <option value="Hard">Hard</option>
+                    </select> -->
+                    <div class="mb-3">
+                        <label for="difficultySelect" class="form-label fw-semibold">Select Difficulty</label>
+                        <select id="difficultySelect" class="form-select" onchange="updateDifficultyDescription()">
+                            <option value="Easy">Easy</option>
+                            <option value="Intermediate" selected>Intermediate</option>
+                            <option value="Hard">Hard</option>
+                        </select>
+                        <div id="difficultyDescription" class="form-text mt-2 text-muted small">
+                            Intermediate: Limited attempts per question, and limited hint usage.
+                        </div>
+                    </div>
+
+                    <div class="alert alert-warning mb-0 small">
+                        <i class="fas fa-info-circle me-1"></i>
+                        Changing difficulty will reset your current progress in this module.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" onclick="applyDifficulty()">Apply</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Reset Progress Modal -->
+    <!-- <div class="modal fade" id="resetModal" tabindex="-1"> -->
+    <div class="modal fade settings-modal" id="resetModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Reset Progress</h5>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to reset all progress?
+                    <p class="mt-2 mb-0">This cannot be undone.</p>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn btn-danger" onclick="confirmReset()">Reset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- FOOTER -->
+    <footer class="footer mt-auto" style="background-color: #f1f1f1;">
+        <div class="container text-center px-3 small text-muted d-flex flex-column justify-content-start"
+            style="height: 120px; padding-top: 25px;">
+            <p class="mb-2 fw-semibold" style="font-size: 1rem;">
+                © 2025 CyberSleuth Academy. Developed by TP Cybersecurity & Digital Forensics Students.
+            </p>
+            <p class="mb-0">All content is for educational purposes only.</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="js/phishing-forensics-tasks.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
