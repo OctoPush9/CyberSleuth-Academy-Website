@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberSleuth Academy Dashboard</title>
+    <link rel="stylesheet" href="css/learn.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <img src="logo.png" alt="CyberSleuth Academy Logo" class="logo">
+            <nav>
+                <a href="home.html">Dashboard</a>
+                <a href="learn.html" class="active">Learn</a>
+                <a href="#">Compete</a>
+                <a href="#">Other</a>
+            </nav>
+        </div>
+        <div class="header-right">
+            <div class="search-container">
+                <input type="text" placeholder="Search..." class="search-bar">
+                <img src="search-icon.png" alt="Search" class="search-icon">
+            </div>
+            <div class="notifications">
+                <img src="bell-icon.png" alt="Notifications">
+                <span class="badge">1</span>
+            </div>
+            <div class="user-profile">
+                <img src="user-avatar.png" alt="User Profile">
+            </div>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <!-- Top Filter Bar -->
+        <div class="top-filter">
+            <div class="search-bar-container filter-search">
+                <input type="text" placeholder="Filter by Name..." aria-label="Filter learning modules"/>
+                <img src="search-icon.png" alt="Search" class="search-icon"/>
+            </div>
+            
+            <div class="sort-filter">
+                <button class="filter-dropdown" onclick="toggleSubmenu('statusMenu')" aria-haspopup="true">
+                    Sort by ▼
+                </button>
+                <div id="statusMenu" class="submenu" role="menu" aria-label="Sort options">
+                    <div class="submenu-option" role="menuitem" tabindex="0">Name</div>
+                    <div class="submenu-option" role="menuitem" tabindex="0">Status</div>
+                        <div class="submenu-option" role="menuitem" tabindex="0">Completed</div>
+                        <div class="submenu-option" role="menuitem" tabindex="0">In-Progress</div>
+                        <div class="submenu-option" role="menuitem" tabindex="0">Not Started</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <h1>Here is where you start your journey!</h1>
+        
+        <div class="card-grid">
+            <!-- Phishing Simulation Card -->
+            <div class="simulation-card">
+                <div class="card-header">
+                    <img src="phishing-icon.png" alt="Phishing"/>
+                    <h2>Phishing Simulation</h2>
+                </div>
+                <div class="card-info">
+                    <div class="info-item">
+                        <img src="Window-icon.png" alt="Windows"/>
+                        <span>Windows</span>
+                    </div>
+                    <div class="info-item">
+                        <img src="difficulty-icon.png" alt="Difficulty"/>
+                        <span>Easy</span>
+                    </div>
+                    <div class="info-item">
+                        <img src="time-icon.png" alt="Time"/>
+                        <span>15 mins</span>
+                    </div>
+                </div>
+                <button class="continue-btn">▶ Continue</button>
+            </div>
+
+            <!-- Insider Threat Simulation Card -->
+            <div class="simulation-card">
+                <div class="card-header">
+                    <img src="insider-icon.png" alt="Insider"/>
+                    <h2>Insider Threat Simulation</h2>
+                </div>
+                <div class="card-info">
+                    <div class="info-item">
+                        <img src="Window-icon.png" alt="Windows"/>
+                        <span>Windows</span>
+                    </div>
+                    <div class="info-item">
+                        <img src="difficulty-icon.png" alt="Difficulty"/>
+                        <span>Medium</span>
+                    </div>
+                    <div class="info-item">
+                        <img src="time-icon.png" alt="Time"/>
+                        <span>25 mins</span>
+                    </div>
+                </div>
+                <button class="continue-btn">▶ Continue</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Prevents submenu from closing when clicking inside
+        document.addEventListener('click', function(event) {
+            const submenus = document.querySelectorAll('.submenu');
+            submenus.forEach(submenu => {
+                if (!event.target.closest('.sort-filter')) {
+                    submenu.style.display = 'none';
+                }
+            });
+        });
+
+        function toggleSubmenu(menuId) {
+            const submenu = document.getElementById(menuId);
+            const isVisible = submenu.style.display === 'block';
+            // Close all submenus first
+            document.querySelectorAll('.submenu').forEach(s => s.style.display = 'none');
+            // Toggle selected
+            submenu.style.display = isVisible ? 'none' : 'block';
+        }
+    </script>
+</body>
+</html>
