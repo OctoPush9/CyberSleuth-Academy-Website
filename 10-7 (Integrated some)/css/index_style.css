@@ -1,0 +1,274 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
+
+/* Root Variables */
+:root {
+  --primary: #00ccff;
+  --secondary: #00ff99;
+  --dark: #0d0d0d;
+  --light-dark: #1a1a1a;
+  --text: #ffffff;
+  --accent: #0099cc;
+  --hover-accent: #006699;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--dark);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Typography */
+h1, h2, h3 {
+  font-family: 'Orbitron', monospace;
+  letter-spacing: 1px;
+}
+
+h1 {
+  font-size: 2.8rem;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+}
+
+p.section-subtitle {
+  font-size: 1.1rem;
+  color: #bbbbbb;
+  max-width: 600px;
+  margin: 1rem auto 2rem;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--light-dark);
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: background 0.3s;
+}
+
+.navbar:hover {
+  background-color: #111111;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary);
+  font-family: 'Orbitron', monospace;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--primary);
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  background: url('cybersecurity-bg.jpg') no-repeat center center/cover;
+  height: 100vh;
+  padding: 4rem 2rem;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 2rem;
+}
+
+.hero h1 {
+  font-size: 3.2rem;
+  margin-bottom: 1.2rem;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+.cta-button {
+  padding: 1rem 2.5rem;
+  background-color: var(--primary);
+  color: #000;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  display: inline-block;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(0, 204, 255, 0.2);
+}
+
+.cta-button:hover {
+  background-color: var(--hover-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 204, 255, 0.3);
+}
+
+/* Sections */
+section {
+  padding: 4rem 2rem;
+  position: relative;
+}
+
+section:nth-child(even) {
+  background-color: #111111;
+}
+
+/* About Section */
+.about {
+  text-align: center;
+  background: linear-gradient(to bottom, #0d0d0d, #111111);
+}
+
+/* What We Provide */
+.what-we-provide {
+  background: linear-gradient(to bottom, #111111, #0d0d0d);
+}
+
+.services {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+.service-card {
+  background-color: var(--light-dark);
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 320px;
+  box-shadow: 0 8px 20px rgba(0, 204, 255, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  flex: 1 1 300px;
+  min-width: 280px;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 204, 255, 0.2);
+}
+
+.card-icon {
+  color: var(--primary);
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Footer */
+.footer {
+  padding: 3rem 2rem;
+  text-align: center;
+  background: var(--light-dark);
+  color: #aaa;
+  position: relative;
+}
+
+.footer-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.footer .footer-logo {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.8rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.social-links {
+  margin: 1.5rem 0;
+}
+
+.social-links a {
+  color: var(--primary);
+  margin: 0 0.8rem;
+  text-decoration: none;
+  font-size: 1.2rem;
+  transition: color 0.3s;
+}
+
+.social-links a:hover {
+  color: var(--secondary);
+}
+
+.footer-bottom {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+}
+
+.credits {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: #777;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+  
+  .services {
+    flex-direction: column;
+    align-items: center;
+  }
+}
