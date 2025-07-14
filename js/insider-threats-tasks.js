@@ -88,7 +88,17 @@ const tasks = [
                     </a>. Used for educational purposes.
                 </p>
             </div>
+            <hr class="my-3" />
 
+            <div class="d-flex align-items-center mb-2">
+            <i class="fas fa-mouse-pointer me-2 fs-4 text-info"></i>
+            <span class="fs-5 fw-semibold">Interactive Activity</span>
+            </div>
+            <p>Drag each real-life behavior to the correct insider threat type.</p>
+
+            <div class="h5p-container my-3">
+            <iframe src="assets/h5p/insider/task2/task2.html" width="100%" height="500" frameborder="0" allowfullscreen></iframe>
+            </div>
         `,
         quiz: [
             {
@@ -140,6 +150,19 @@ const tasks = [
             <p>They could act secretive, upset, or suddenly talk badly about the company. Even skipping security rules can be a red flag.</p>
 
             <p>It’s important to notice these signs early. Reporting strange behavior can prevent bigger problems later.</p>
+            <hr class="my-3" />
+
+            <div class="d-flex align-items-center mb-2">
+            <i class="fas fa-mouse-pointer me-2 fs-4 text-info"></i>
+            <span class="fs-5 fw-semibold">Interactive Activity</span>
+            </div>
+
+            <p>Drag the missing words into the blanks to complete each sentence about red flag behaviors.</p>
+
+            <div class="h5p-container my-3">
+            <iframe src="assets/h5p/insider/task3/task3.html" width="100%" height="450" frameborder="0" allowfullscreen></iframe>
+            </div>
+
         `,
         quiz: [
             {
@@ -191,6 +214,18 @@ const tasks = [
                     </a>. Used for educational purposes.
                 </p>
             </div>
+            <hr class="my-3" />
+
+            <div class="d-flex align-items-center mb-2">
+            <i class="fas fa-mouse-pointer me-2 fs-4 text-info"></i>
+            <span class="fs-5 fw-semibold">Interactive Activity</span>
+            </div>
+
+            <p>Complete the blanks to review access control, RBAC, PoLP, and logging best practices.</p>
+
+            <div class="h5p-container my-3">
+            <iframe src="assets/h5p/insider/task4/task4.html" width="100%" height="350" frameborder="0" allowfullscreen></iframe>
+            </div>
 
         `,
         quiz: [
@@ -226,6 +261,19 @@ const tasks = [
             <p>To reduce risk, organizations need to run user awareness training regularly. Sending short security videos every few weeks helps remind staff what to look out for and reinforces safe habits.</p>
 
             <p>Everyone needs to follow access rules, use strong passwords, and report anything strange. Prevention works best when both employees and organizations take action together.</p>
+            <hr class="my-3" />
+
+            <div class="d-flex align-items-center mb-2">
+            <i class="fas fa-mouse-pointer me-2 fs-4 text-info"></i>
+            <span class="fs-5 fw-semibold">Interactive Activity</span>
+            </div>
+
+            <p>Drag the correct best-practice words into the blank spaces to complete each insider threat prevention tip.</p>
+
+            <div class="h5p-container my-3">
+            <iframe src="assets/h5p/insider/task5/task5.html" width="100%" height="400" frameborder="0" allowfullscreen></iframe>
+            </div>
+
         `,
         quiz: [
             {
