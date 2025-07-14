@@ -346,6 +346,11 @@ body {
     color: #f1c40f !important;
 }
 
+/* === FIX: Muted Text Visibility in Dark Mode === */
+.dark-mode .text-muted {
+    color: #bbbbbb !important;
+}
+
 /* === H5P EMBEDS === */
 .h5p-container {
     max-width: 100%;
