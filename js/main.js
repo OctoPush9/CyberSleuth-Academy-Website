@@ -933,7 +933,10 @@ function reloadAllH5P() {
         });
     });
 }
-// Run reload once when DOM is fully loaded
-document.addEventListener("DOMContentLoaded", () => {
-    reloadAllH5P();
+
+// Alert users not to close or reload browser - progress will not be saved.
+
+window.addEventListener("beforeunload", function (e) {
+    e.preventDefault();
+    e.returnValue = "";
 });
