@@ -79,6 +79,26 @@
       z-index: 999;
       display: none;
     }
+    
+    /* for the href button */
+    .corner-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #007bff;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 16px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  transition: background-color 0.3s;
+  z-index: 1001; /* So it's above your panels */
+}
+
+.corner-button:hover {
+  background-color: #0056b3;
+}
   </style>
 </head>
 <body>
@@ -86,7 +106,7 @@
   <h2 style="text-align:center;">virustotal Simulated Interface - Click the Areas!</h2>
 
   <div class="screenshot-container">
-    <img src="your-screenshot.png" alt="Cybersecurity Screenshot" />
+    <img src="img_folder/your-screenshot.png" alt="Cybersecurity Screenshot" />
 
     <div class="hotspot-button" style="top: 40%; left: 50%; width: 15%; height: 10%;" onclick="openToolInfo('Firewall')"></div>
     <div class="hotspot-button" style="top: 60%; left: 30%; width: 20%; height: 12%;" onclick="openToolInfo('Antivirus')"></div>
@@ -126,6 +146,8 @@
       document.getElementById("overlay").style.display = "none";
     }
   </script>
+  <!--the href button-->
+  <a href="mitigation_measures.html" class="corner-button">Explore Mitigation Measures</a>
 
 </body>
 </html>
