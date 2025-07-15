@@ -92,7 +92,7 @@ const tasks = [
 
             <div class="d-flex align-items-center mb-2">
             <i class="fas fa-mouse-pointer me-2 fs-4 text-info"></i>
-            <span class="fs-5 fw-semibold">Interactive Activity</span>
+            <span class="fs-5 fw-semibold">Interactive Activity <span class="text-muted small">(optional)</span></span>
             </div>
             <p>Drag each real-life behavior to the correct insider threat type.</p>
 
@@ -154,7 +154,7 @@ const tasks = [
 
             <div class="d-flex align-items-center mb-2">
             <i class="fas fa-mouse-pointer me-2 fs-4 text-info"></i>
-            <span class="fs-5 fw-semibold">Interactive Activity</span>
+            <span class="fs-5 fw-semibold">Interactive Activity <span class="text-muted small">(optional)</span></span>
             </div>
 
             <p>Drag the missing words into the blanks to complete each sentence about red flag behaviors.</p>
@@ -218,7 +218,7 @@ const tasks = [
 
             <div class="d-flex align-items-center mb-2">
             <i class="fas fa-mouse-pointer me-2 fs-4 text-info"></i>
-            <span class="fs-5 fw-semibold">Interactive Activity</span>
+            <span class="fs-5 fw-semibold">Interactive Activity <span class="text-muted small">(optional)</span></span>
             </div>
 
             <p>Complete the blanks to review access control, RBAC, PoLP, and logging best practices.</p>
@@ -265,7 +265,7 @@ const tasks = [
 
             <div class="d-flex align-items-center mb-2">
             <i class="fas fa-mouse-pointer me-2 fs-4 text-info"></i>
-            <span class="fs-5 fw-semibold">Interactive Activity</span>
+            <span class="fs-5 fw-semibold">Interactive Activity <span class="text-muted small">(optional)</span></span>
             </div>
 
             <p>Drag the correct best-practice words into the blank spaces to complete each insider threat prevention tip.</p>

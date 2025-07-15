@@ -94,7 +94,7 @@ const tasks = [
 
         <div class="d-flex align-items-center mb-2">
             <i class="fas fa-mouse-pointer me-2 fs-4 text-info"></i>
-            <span class="fs-5 fw-semibold">Interactive Activity</span>
+            <span class="fs-5 fw-semibold">Interactive Activity <span class="text-muted small">(optional)</span></span>
         </div>
         <p>This header has several warning signs of spoofing. Click each hotspot to understand what’s suspicious and why it matters.</p>
 
@@ -178,7 +178,7 @@ const tasks = [
 
         <div class="d-flex align-items-center mb-2">
             <i class="fas fa-mouse-pointer me-2 fs-4 text-info"></i>
-            <span class="fs-5 fw-semibold">Interactive Activity</span>
+            <span class="fs-5 fw-semibold">Interactive Activity <span class="text-muted small">(optional)</span></span>
         </div>
 
         <p>Click each link preview below and decide if it's safe or suspicious. Use what you’ve learned to identify red flags like misspelled domains or lack of HTTPS.</p>
@@ -240,7 +240,7 @@ const tasks = [
 
         <div class="d-flex align-items-center mb-2">
         <i class="fas fa-mouse-pointer me-2 fs-4 text-info"></i>
-        <span class="fs-5 fw-semibold">Interactive Activity</span>
+        <span class="fs-5 fw-semibold">Interactive Activity <span class="text-muted small">(optional)</span></span>
         </div>
         <p>Complete the blanks below to review key points about dangerous attachments and how to check them.</p>
 
@@ -316,7 +316,7 @@ const tasks = [
 
         <div class="d-flex align-items-center mb-2">
             <i class="fas fa-mouse-pointer me-2 fs-4 text-info"></i>
-            <span class="fs-5 fw-semibold">Interactive Activity</span>
+            <span class="fs-5 fw-semibold">Interactive Activity <span class="text-muted small">(optional)</span></span>
         </div>
         <p>Slide through the example below to see how SPF, DKIM, and DMARC protect emails from being spoofed.</p>
 
@@ -423,7 +423,7 @@ const tasks = [
 
             <div class="d-flex align-items-center mb-2">
                 <i class="fas fa-mouse-pointer me-2 fs-4 text-info"></i>
-                <span class="fs-5 fw-semibold">Interactive Activity</span>
+                <span class="fs-5 fw-semibold">Interactive Activity <span class="text-muted small">(optional)</span></span>
             </div>
             <p>Drag each phrase to either the “Safe” or “Phishing” tone category based on how it sounds. Can you spot the red flags?</p>
 
@@ -499,7 +499,7 @@ const tasks = [
 
         <div class="d-flex align-items-center mb-2">
             <i class="fas fa-mouse-pointer me-2 fs-4 text-info"></i>
-            <span class="fs-5 fw-semibold">Interactive Activity</span>
+            <span class="fs-5 fw-semibold">Interactive Activity <span class="text-muted small">(optional)</span></span>
         </div>
         <p>Click the spot in the image where you would report a phishing email in Gmail or Outlook.</p>
 
