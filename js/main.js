@@ -20,6 +20,10 @@ const taskCompletion = Array(tasks.length).fill(false);
 const answeredCorrectly = tasks.map(task => Array(task.quiz.length).fill(false));
 const attemptsLeft = tasks.map(task => task.quiz.map(q => q.attemptsAllowed));
 
+// Detect which lab is running (phishing or insider)
+const moduleType = document.title.includes("Insider Threats") ? "Insider Threats" : "Phishing Forensics";
+
+
 // ========================================
 // Render Tasks & Quizzes
 // Handles all card generation per task
@@ -541,18 +545,19 @@ function updateBadge(percent) {
     let badgeHTML = "";
 
     // Badge thresholds
+    const prefix = moduleType === "Insider Threats" ? "Insider Threats" : "Phishing Forensics";
+
     if (percent >= 100) {
         newBadge = "gold";
-        badgeHTML = `<span class="badge rounded-pill bg-primary text-white small">🥇 Phishing Forensics Expert</span>`;
+        badgeHTML = `<span class="badge rounded-pill bg-primary text-white small">🥇 ${prefix} Expert</span>`;
     } else if (percent >= 70) {
         newBadge = "silver";
-        badgeHTML = `<span class="badge rounded-pill bg-info text-white small">🥈 Phishing Forensics Specialist</span>`;
+        badgeHTML = `<span class="badge rounded-pill bg-info text-white small">🥈 ${prefix} Specialist</span>`;
     } else if (percent >= 50) {
         newBadge = "bronze";
-        badgeHTML = `<span class="badge rounded-pill bg-secondary text-white small">🥉 Phishing Forensics Rookie</span>`;
-    } else {
-        badgeHTML = "No badges";
+        badgeHTML = `<span class="badge rounded-pill bg-secondary text-white small">🥉 ${prefix} Rookie</span>`;
     }
+
 
     // Only update if changed
     if (newBadge !== previousBadge) {
@@ -560,9 +565,9 @@ function updateBadge(percent) {
         badgeEl.innerHTML = badgeHTML;
 
         const messages = {
-            bronze: "🎉 Congrats! You unlocked the ‘🥉 Phishing Forensics Rookie’ badge!",
-            silver: "🎉 Congrats! You unlocked the ‘🥈 Phishing Forensics Specialist’ badge!",
-            gold: "🎉 Congrats! You unlocked the ‘🥇 Phishing Forensics Expert’ badge! You've also completed the entire Phishing Forensics module."
+            bronze: `🎉 Congrats! You unlocked the ‘🥉 ${prefix} Rookie’ badge!`,
+            silver: `🎉 Congrats! You unlocked the ‘🥈 ${prefix} Specialist’ badge!`,
+            gold: `🎉 Congrats! You unlocked the ‘🥇 ${prefix} Expert’ badge! You've also completed the entire ${prefix} module.`
         };
 
         if (newBadge && messages[newBadge]) {
