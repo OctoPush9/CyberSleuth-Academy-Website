@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/images/cybersleuth-icon.png" type="image/png">
+    <title>CyberSleuth Academy Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css ">
+    <link rel="stylesheet" href="css/learn.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <img src="assets/images/cybersleuth-icon.png" alt="CyberSleuth Academy Logo" class="logo"> CyberSleuth Academy
+            <nav>
+                <a href="home.html">Simulation Rooms</a>
+                <a href="learn.html" class="active">Learn</a>
+                <a href="leaderboard.html">Compete</a>
+                <a href="quiz.html">Content</a>
+            </nav>
+        </div>
+        <div class="header-right">
+            <div class="search-container">
+                <input type="text" placeholder="Search..." class="search-bar">
+                <i class="fa fa-search search-icon"></i>
+            </div>
+            <div class="notifications">
+                <i class="fa-solid fa-bell" style="color: #ffffff;"></i>
+                <span class="badge">1</span>
+            </div>
+            <div class="user-profile">
+                <i class="fa-solid fa-user" style="color: #ffffff;"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Filter Bar -->
+    <div class="top-filter">
+        <div class="search-bar-container filter-search">
+            <input type="text" id="nameFilter" placeholder="Filter by Name..." aria-label="Filter learning modules by name"/>
+        </div>
+
+        <!-- Status Filter -->
+        <div class="status-filter">
+            <button class="filter-dropdown" onclick="toggleStatusMenu()" aria-haspopup="true">
+                Sort by Status: <span id="selectedStatus">All</span> ▼
+            </button>
+            <div id="statusMenu" class="submenu" role="menu">
+                <div class="submenu-option" onclick="setStatus('all')">All</div>
+                <div class="submenu-option" onclick="setStatus('completed')">Completed</div>
+                <div class="submenu-option" onclick="setStatus('in-progress')">In Progress</div>
+                <div class="submenu-option" onclick="setStatus('not-started')">Not Started</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Centralized Learning Cards Section -->
+    <main class="main-content">
+        <h1>Here is where you start your journey!</h1>
+
+        <!-- Central Box Container -->
+        <div class="central-box">
+            <div class="card-grid" id="cardGrid">
+                <!-- Phishing Simulation Card -->
+                <div class="simulation-card" data-title="Phishing Simulation" data-status="completed">
+                    <div class="card-header">
+                        <img src="phishing-icon.png" alt="Phishing"/>
+                        <h2>Phishing Simulation</h2>
+                    </div>
+                    <div class="card-info">
+                        <div class="info-item">
+                            <img src="Window-icon.png" alt="Windows"/>
+                            <span>Windows</span>
+                        </div>
+                        <div class="info-item">
+                            <img src="difficulty-icon.png" alt="Difficulty"/>
+                            <span>Easy</span>
+                        </div>
+                        <div class="info-item">
+                            <img src="time-icon.png" alt="Time"/>
+                            <span>15 mins</span>
+                        </div>
+                    </div>
+                    <button class="continue-btn" onclick="window.location.href='phishing.html'">▶ Continue</button>
+                </div>
+
+                <!-- Insider Threat Simulation Card -->
+                <div class="simulation-card" data-title="Insider Threat Simulation" data-status="in-progress">
+                    <div class="card-header">
+                        <img src="insider-icon.png" alt="Insider"/>
+                        <h2>Insider Threat Simulation</h2>
+                    </div>
+                    <div class="card-info">
+                        <div class="info-item">
+                            <img src="Window-icon.png" alt="Windows"/>
+                            <span>Windows</span>
+                        </div>
+                        <div class="info-item">
+                            <img src="difficulty-icon.png" alt="Difficulty"/>
+                            <span>Medium</span>
+                        </div>
+                        <div class="info-item">
+                            <img src="time-icon.png" alt="Time"/>
+                            <span>25 mins</span>
+                        </div>
+                    </div>
+                    <button class="continue-btn" onclick="window.location.href='insider_threat.html'">▶ Continue</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let currentSort = '';
+        let currentStatus = 'all';
+
+        function toggleSortMenu() {
+            const menu = document.getElementById('sortMenu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function toggleStatusMenu() {
+            const menu = document.getElementById('statusMenu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function setSort(option) {
+            currentSort = option;
+            document.getElementById('selectedSort').textContent = option.charAt(0).toUpperCase() + option.slice(1);
+            document.getElementById('sortMenu').style.display = 'none';
+            applyFilters();
+        }
+
+        function setStatus(option) {
+            currentStatus = option;
+            document.getElementById('selectedStatus').textContent = option.charAt(0).toUpperCase() + option.slice(1);
+            document.getElementById('statusMenu').style.display = 'none';
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const nameFilter = document.getElementById('nameFilter').value.toLowerCase();
+            const cards = document.querySelectorAll('.simulation-card');
+
+            cards.forEach(card => {
+                const title = card.dataset.title.toLowerCase();
+                const status = card.dataset.status;
+
+                let matchesName = true;
+                let matchesStatus = true;
+
+                if (nameFilter !== '') {
+                    matchesName = title.includes(nameFilter);
+                }
+
+                if (currentStatus !== 'all') {
+                    matchesStatus = status === currentStatus;
+                }
+
+                if (matchesName && matchesStatus) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Close submenus when clicking outside
+        document.addEventListener('click', function(event) {
+            const submenus = document.querySelectorAll('.submenu');
+            submenus.forEach(submenu => {
+                if (!event.target.closest('.filter-dropdown')) {
+                    submenu.style.display = 'none';
+                }
+            });
+        });
+
+        // Apply filters as user types
+        document.getElementById('nameFilter').addEventListener('input', applyFilters);
+    </script>
+</body>
+</html>

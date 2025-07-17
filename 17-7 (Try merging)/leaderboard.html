@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/images/cybersleuth-icon.png" type="image/png">
+    <title>CyberSleuth Academy Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css ">
+    <link rel="stylesheet" href="css/leaderboard.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <img src="assets/images/cybersleuth-icon.png" alt="CyberSleuth Academy Logo" class="logo"> CyberSleuth Academy
+            <nav>
+                <a href="home.html">Simulation Rooms</a>
+                <a href="learn.html">Learn</a>
+                <a href="leaderboard.html" class="active">Compete</a>
+                <a href="quiz.html">Content</a>
+            </nav>
+        </div>
+        <div class="header-right">
+            <div class="search-container">
+                <input type="text" placeholder="Search..." class="search-bar">
+                <i class="fa fa-search search-icon"></i>
+            </div>
+            <div class="notifications">
+                <i class="fa-solid fa-bell" style="color: #ffffff;"></i>
+                <span class="badge">1</span>
+            </div>
+            <div class="user-profile">
+                <i class="fa-solid fa-user" style="color: #ffffff;"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="leaderboard-section">
+            <h1 class="leaderboard-title">Leaderboards</h1>
+            <p class="leaderboard-welcome">Welcome to the wall of fame - Here are some of our top users.</p>
+
+            <div class="filters">
+                <button class="filter-button active">General</button>
+                <button class="filter-button">All time</button>
+                <button class="filter-button">Monthly</button>
+                <select class="filter-select">
+                    <option value="all-countries">All countries</option>
+                    <option value="usa">US</option>
+                    <option value="uk">UK</option>
+                    <option value="sg">SG</option>
+                </select>
+            </div>
+
+            <div class="top-users">
+                <!-- First User -->
+                <div class="top-user">
+                    <span class="rank">1</span>
+                    <img src="user1.jpg" alt="User 1" class="profile-pic">
+                    <div class="user-info">
+                        <h3>Jack</h3>
+                        <p>Points: 200</p>
+                        <p>Rooms in: 2</p>
+                        <p>Country: US</p>
+                    </div>
+                </div>
+
+                <!-- Second User -->
+                <div class="top-user">
+                    <span class="rank">2</span>
+                    <img src="user2.jpg" alt="User 2" class="profile-pic">
+                    <div class="user-info">
+                        <h3>John</h3>
+                        <p>Points: 199</p>
+                        <p>Rooms in: 2</p>
+                        <p>Country: UK</p>
+                    </div>
+                </div>
+
+                <!-- Third User -->
+                <div class="top-user">
+                    <span class="rank">3</span>
+                    <img src="user3.jpg" alt="User 3" class="profile-pic">
+                    <div class="user-info">
+                        <h3>Tim</h3>
+                        <p>Points: 198</p>
+                        <p>Rooms in: 2</p>
+                        <p>Country: SG</p>
+                    </div>
+                </div>
+
+                <!-- Fourth User -->
+                <div class="top-user">
+                    <span class="rank">4</span>
+                    <img src="user4.jpg" alt="User 4" class="profile-pic">
+                    <div class="user-info">
+                        <h3>Jane</h3>
+                        <p>Points: 197</p>
+                        <p>Rooms in: 2</p>
+                        <p>Country: US</p>
+                    </div>
+                </div>
+
+                <!-- Fifth User -->
+                <div class="top-user">
+                    <span class="rank">5</span>
+                    <img src="user5.jpg" alt="User 5" class="profile-pic">
+                    <div class="user-info">
+                        <h3>Mary</h3>
+                        <p>Points: 196</p>
+                        <p>Rooms in: 2</p>
+                        <p>Country: US</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <!-- Leaderboard Table -->
+            <table class="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Username</th>
+                        <th>Country</th>
+                        <th>Points</th>
+                        <th>Rooms</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>6</td>
+                        <td><img src="user6.jpg" alt="User 6" class="profile-pic-small"> Tom</td>
+                        <td>SG</td>
+                        <td>195</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td><img src="user7.jpg" alt="User 7" class="profile-pic-small"> Harry</td>
+                        <td>SG</td>
+                        <td>194</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td><img src="user8.jpg" alt="User 8" class="profile-pic-small"> Thomas</td>
+                        <td>SG</td>
+                        <td>193</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td><img src="user9.jpg" alt="User 9" class="profile-pic-small"> Angel</td>
+                        <td>SG</td>
+                        <td>192</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td><img src="user10.jpg" alt="User 10" class="profile-pic-small"> Bob</td>
+                        <td>SG</td>
+                        <td>190</td>
+                        <td>2</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+</body>
+</html>

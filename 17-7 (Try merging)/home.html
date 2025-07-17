@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/images/cybersleuth-icon.png" type="image/png">
+    <title>CyberSleuth Academy Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css ">
+    <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <img src="assets/images/cybersleuth-icon.png" alt="CyberSleuth Academy Logo" class="logo"> CyberSleuth Academy
+            <nav>
+                <a href="home.html" class="active">Simulation Rooms</a>
+                <a href="learn.html">Learn</a>
+                <a href="leaderboard.html">Compete</a>
+                <a href="quiz.html">Content</a>
+            </nav>
+        </div>
+        <div class="header-right">
+            <div class="search-container">
+                <input type="text" placeholder="Search..." class="search-bar">
+                <i class="fa fa-search search-icon"></i>
+            </div>
+            <div class="notifications">
+                <i class="fa-solid fa-bell" style="color: #ffffff;"></i>
+                <span class="badge">1</span>
+            </div>
+            <div class="user-profile">
+                <i class="fa-solid fa-user" style="color: #ffffff;"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="content-grid">
+            <!-- Left Column -->
+            <div class="left-column">
+                <div class="welcome-card">
+                    <h2>Let's keep going! Complete these rooms you have started!</h2>
+                    
+                    <!-- Phishing Simulation Card -->
+                    <div class="course-card">
+                        <img src="offensive-security.png" alt="Phishing" class="course-icon">
+                        <div class="course-details">
+                            <h3>Phishing Simulation</h3>
+                            <div class="progress-bar">
+                                <div class="progress phishing-progress" style="width: 50%;">50%</div>
+                            </div>
+                        </div>
+                    <button class="start-btn" onclick="window.location.href='phishing.html'">▶ Continue</button>
+                    </div>
+                    
+                    <!-- Insider Threat Simulation Card -->
+                    <div class="course-card">
+                        <img src="defensive-security.png" alt="Insider" class="course-icon">
+                        <div class="course-details">
+                            <h3>Insider Threat Simulation</h3>
+                            <div class="progress-bar">
+                                <div class="progress insider-progress" style="width: 30%;">30%</div>
+                            </div>
+                        </div>
+                        <button class="start-btn" onclick="window.location.href='insider_threat.html'">▶ Continue</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="right-column">
+                <div class="stats-card">
+                    <h3>0 Questions</h3>
+                    <p>Answered this week.</p>
+                </div>
+                <div class="weekly-leagues">
+                    <h3>Weekly Leagues</h3>
+                    <button class="view-league-btn">View league</button>
+                    <div class="league-info">
+                        <img src="shield-icon.png" alt="League Shield" class="league-icon">
+                        <p>Complete two rooms to join this week's league!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
