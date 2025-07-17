@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Explore Task Manager</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+    }
+
+    .screenshot-container {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .screenshot-container img {
+      width: 100%;
+      display: block;
+    }
+
+    .hotspot-button {
+      position: absolute;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .hotspot-button:hover {
+      background-color: rgba(0, 123, 255, 0.3);
+    }
+
+    /* Popup panel styling */
+    .info-panel {
+      position: fixed;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: white;
+      border: 2px solid #333;
+      padding: 20px;
+      width: 80%;
+      max-width: 500px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      z-index: 1000;
+      display: none; /* hidden by default */
+    }
+
+    .info-panel h3 {
+      margin-top: 0;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 20px;
+      cursor: pointer;
+      color: #888;
+    }
+
+    .close-btn:hover {
+      color: #000;
+    }
+
+    /* Optional: dim background when popup is open */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 999;
+      display: none;
+    }
+
+    /* for the href button */
+    .corner-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #007bff;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 16px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  transition: background-color 0.3s;
+  z-index: 1001; /* So it's above your panels */
+}
+
+.corner-button:hover {
+  background-color: #0056b3;
+}
+
+  </style>
+</head>
+<body>
+
+  <h2 style="text-align:center;">task_manager Simulated Interface - Click the Areas!</h2>
+
+  <div class="screenshot-container">
+    <img src="img_folder/your-screenshot.png" alt="Cybersecurity Screenshot" />
+
+    <div class="hotspot-button" style="top: 40%; left: 50%; width: 15%; height: 10%;" onclick="openToolInfo('Firewall')"></div>
+    <div class="hotspot-button" style="top: 60%; left: 30%; width: 20%; height: 12%;" onclick="openToolInfo('Antivirus')"></div>
+    <div class="hotspot-button" style="top: 85%; left: 70%; width: 20%; height: 10%;" onclick="openToolInfo('Phishing Simulation')"></div>
+  </div>
+
+  <!-- Overlay + Panel -->
+  <div class="overlay" id="overlay" onclick="closePanel()"></div>
+
+  <div class="info-panel" id="infoPanel">
+    <span class="close-btn" onclick="closePanel()">×</span>
+    <h3 id="panelTitle">Title</h3>
+    <p id="panelContent">Information goes here...</p>
+  </div>
+
+  <script>
+    // Information to display per button/tool
+    const toolData = {
+      "Firewall": "A firewall is a network security device that monitors and filters incoming and outgoing network traffic based on security rules.",
+      "Antivirus": "Antivirus software is designed to detect, prevent, and remove malware including viruses, worms, and trojan horses.",
+      "Phishing Simulation": "Phishing simulations help train users by mimicking real phishing attacks to improve awareness and response to threats."
+    };
+
+    // Open panel with info
+    function openToolInfo(toolName) {
+      const panel = document.getElementById("infoPanel");
+      const overlay = document.getElementById("overlay");
+      document.getElementById("panelTitle").textContent = toolName;
+      document.getElementById("panelContent").textContent = toolData[toolName] || "No information available.";
+      panel.style.display = "block";
+      overlay.style.display = "block";
+    }
+
+    // Close panel
+    function closePanel() {
+      document.getElementById("infoPanel").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+    }
+  </script>
+  <!--the href button-->
+  <a href="wireshark.html" class="corner-button">Explore Wireshark</a>
+
+</body>
+</html>
