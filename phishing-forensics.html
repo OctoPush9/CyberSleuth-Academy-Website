@@ -5,6 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- Helps with dynamic JS to detect which lab change for every lab html files -->
+    <meta name="lab-title" content="Phishing Forensics Lab">
+
     <!-- Website Tab Icon and Page Title -->
     <link rel="icon" href="assets/images/cybersleuth-icon.png" type="image/png">
     <title>Phishing Forensics Lab</title>
@@ -27,7 +30,8 @@
 
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="#">
-                <i class="fas fa-shield-alt me-2"></i>CyberSleuth Academy
+                <img src="assets/images/cybersleuth-icon.png" alt="Logo" class="me-2" style="height: 24px;">CyberSleuth
+                Academy
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -191,6 +195,12 @@
                         </ul>
                         </p>
 
+                        <p class="mt-3"><strong><i class="fas fa-certificate text-success me-1"></i>Certificate Of
+                                Completion:</strong> The "Download Certificate" button appears inside the last task card
+                            (Conclusion). It stays disabled until all tasks are fully completed. When unlocked, you’ll
+                            be asked to enter your full name (letters and spaces only). Once confirmed, a PDF
+                            certificate with your name will be downloaded.</p>
+
                         <p class="mb-0"><strong><i class="fas fa-lightbulb text-primary me-1"></i>Tip:</strong> Stay
                             focused and accurate to score full points in one go.</p>
                     </div>
@@ -275,6 +285,7 @@
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="js/phishing-forensics-tasks.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="js/main.js"></script>
 </body>
 

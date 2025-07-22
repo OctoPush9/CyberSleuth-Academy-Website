@@ -365,3 +365,16 @@ body {
     opacity: 1 !important;
     visibility: visible !important;
 }
+
+/* === Download cert btn style === */
+#downloadCertBtn {
+    border-width: 2px;
+    font-size: 1rem;
+    padding: 0.6rem 1.2rem;
+}
+
+#downloadCertBtn:hover {
+    background-color: #198754;
+    /* Bootstrap green */
+    color: #fff;
+}

@@ -1450,110 +1450,6 @@ let certificateDownloadCount = parseInt(localStorage.getItem("certDownloadCount"
 // }
 
 
-// function generateCertificate(userName) {
-//     const { jsPDF } = window.jspdf;
-//     if (!jsPDF) {
-//         alert("Certificate library failed to load. Please check your internet connection.");
-//         return;
-//     }
-
-//     // ===== Check name length =====
-//     if (userName.length > 40) {
-//         alert("The name entered is too long. \n\nPlease enter a shorter version of your name (ideally under 40 characters).");
-//         return;
-//     }
-
-
-//     // ===== Get lab name from meta tag =====
-//     const metaTag = document.querySelector('meta[name="lab-title"]');
-//     const labTitle = metaTag ? metaTag.content : "Cybersecurity Lab"; // fallback if missing
-
-//     const labKey = `certDownloadCount_${labTitle}`;
-//     let certificateDownloadCount = parseInt(localStorage.getItem(labKey)) || 0;
-//     certificateDownloadCount++;
-//     localStorage.setItem(labKey, certificateDownloadCount);
-
-
-//     const doc = new jsPDF({
-//         orientation: "landscape",
-//         unit: "pt",
-//         format: "a4"
-//     });
-
-//     const width = doc.internal.pageSize.width;
-//     const height = doc.internal.pageSize.height;
-
-//     // ===== Background =====
-//     doc.setFillColor(255, 253, 245); // Light ivory tone
-//     doc.rect(0, 0, width, height, 'F');
-
-//     // ===== Header Bar =====
-//     doc.setFillColor(33, 106, 203); // Bootstrap blue
-//     doc.rect(0, 0, width, 80, 'F');
-
-//     // ===== Academy Logo and Name =====
-//     const logoX = 50;
-//     const logoY = 25;
-//     const logoSize = 30;
-
-//     doc.addImage(cyberSleuthIcon, "PNG", logoX, logoY, logoSize, logoSize); // icon
-
-//     doc.setFont("helvetica", "bold");
-//     doc.setFontSize(26);
-//     doc.setTextColor(255, 255, 255);
-//     doc.text("CyberSleuth Academy", logoX + logoSize + 10, 50); // text beside icon
-
-
-//     // ===== Title =====
-//     doc.setFont("helvetica", "bold");
-//     doc.setFontSize(40);
-//     doc.setTextColor(40, 40, 40); // Dark gray
-//     doc.text("CERTIFICATE", width / 2, 150, { align: "center" });
-
-//     // ===== Subtitle =====
-//     doc.setFontSize(20);
-//     doc.text("OF COMPLETION", width / 2, 180, { align: "center" });
-
-//     // ===== Presented To =====
-//     doc.setFont("helvetica", "normal");
-//     doc.setFontSize(16);
-//     doc.text("This Certificate is presented to", width / 2, 230, { align: "center" });
-
-//     // ===== User Name =====
-//     doc.setFont("times", "bolditalic");
-//     doc.setFontSize(32);
-//     doc.text(userName, width / 2, 270, { align: "center" });
-
-//     // ===== Achievement Description (with dynamic lab name) =====
-//     doc.setFont("helvetica", "normal");
-//     doc.setFontSize(16);
-//     doc.text(`For successfully completing the ${labTitle}`, width / 2, 320, { align: "center" });
-
-//     // ===== Footer Background =====
-//     doc.setFillColor(240, 240, 240); // Light gray
-//     doc.rect(0, height - 60, width, 60, 'F');
-
-//     // ===== Footer Info =====
-//     doc.setFontSize(12);
-//     doc.setTextColor(50, 50, 50);
-
-//     const today = new Date().toLocaleDateString("en-GB");
-//     doc.text(`Issued on: ${today}`, width - 50, height - 30, { align: "right" });
-
-//     // Generate alphanumerical Certificate ID
-//     const certId = "CSA-" + Array.from({ length: 8 }, () =>
-//         "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"[Math.floor(Math.random() * 36)]
-//     ).join('');
-//     doc.text(`Certificate ID: ${certId}`, 40, height - 45);
-
-//     doc.text(`Download Count: ${certificateDownloadCount}`, 40, height - 30);
-
-//     // ===== Save with correct lab name in filename =====
-//     const cleanLabName = labTitle.toLowerCase().replace(/\s+/g, "_").replace(/[^\w]/g, "");
-//     doc.save(`${userName.replace(/\s+/g, "_")}_${cleanLabName}_certificate.pdf`);
-// }
-
-
 function generateCertificate(userName) {
     const { jsPDF } = window.jspdf;
     if (!jsPDF) {
@@ -1607,30 +1503,31 @@ function generateCertificate(userName) {
     doc.setTextColor(255, 255, 255);
     doc.text("CyberSleuth Academy", logoX + logoSize + 10, 50); // text beside icon
 
-    const contentYOffset = 60; // you can increase this value to move content further down
 
     // ===== Title =====
     doc.setFont("helvetica", "bold");
     doc.setFontSize(40);
     doc.setTextColor(40, 40, 40); // Dark gray
-    doc.text("CERTIFICATE", width / 2, 150 + contentYOffset, { align: "center" });
+    doc.text("CERTIFICATE", width / 2, 150, { align: "center" });
+
+    // ===== Subtitle =====
     doc.setFontSize(20);
-    doc.text("OF COMPLETION", width / 2, 180 + contentYOffset, { align: "center" });
+    doc.text("OF COMPLETION", width / 2, 180, { align: "center" });
+
+    // ===== Presented To =====
     doc.setFont("helvetica", "normal");
     doc.setFontSize(16);
-    doc.text("This Certificate is presented to", width / 2, 230 + contentYOffset, { align: "center" });
-
+    doc.text("This Certificate is presented to", width / 2, 230, { align: "center" });
 
     // ===== User Name =====
     doc.setFont("times", "bolditalic");
     doc.setFontSize(32);
-    doc.text(userName, width / 2, 270 + contentYOffset, { align: "center" });
+    doc.text(userName, width / 2, 270, { align: "center" });
 
     // ===== Achievement Description (with dynamic lab name) =====
     doc.setFont("helvetica", "normal");
     doc.setFontSize(16);
-    doc.text(`For successfully completing the ${labTitle}`, width / 2, 320 + contentYOffset, { align: "center" });
-
+    doc.text(`For successfully completing the ${labTitle}`, width / 2, 320, { align: "center" });
 
     // ===== Footer Background =====
     doc.setFillColor(240, 240, 240); // Light gray
