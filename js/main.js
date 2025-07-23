@@ -1,6 +1,6 @@
 // ========================================
 // CyberSleuth Lab Engine – Core Setup
-// Shared across all modules like phishing, insider etc.
+// Shared across all Labs like phishing, insider etc.
 // ========================================
 
 // Global state
@@ -21,7 +21,7 @@ const answeredCorrectly = tasks.map(task => Array(task.quiz.length).fill(false))
 const attemptsLeft = tasks.map(task => task.quiz.map(q => q.attemptsAllowed));
 
 // Detect which lab is running (phishing or insider)
-const moduleType = document.title.includes("Insider Threats") ? "Insider Threats" : "Phishing Forensics";
+const moduleType = document.title.includes("Insider Threats") ? "Insider Threats" : "Phishing Forensics"; //remove
 
 // ===== Get lab info from <meta> tag for global use =====
 const labMetaTag = document.querySelector('meta[name="lab-title"]');
@@ -58,37 +58,10 @@ function renderTasks() {
 
     // ====== Render Each Task ======
     tasks.forEach((task, taskIndex) => {
-        // const quizHTML = task.quiz.map((question, qIndex) =>
-        //     generateQuizBlock(taskIndex, qIndex, question)
-        // ).join("");
         let quizHTML = task.quiz.map((question, qIndex) =>
             generateQuizBlock(taskIndex, qIndex, question)
         ).join("");
 
-        // If it's the last task (e.g. task 8), add certificate button
-        // if (taskIndex === tasks.length - 1) {
-        //     quizHTML += `
-        //         <div class="text-center mt-4">
-
-        //             <button id="downloadCertBtn" class="btn btn-outline-success fw-semibold">
-        //                 <i class="fas fa-file-download fa-lg me-2"></i> Download Certificate
-        //             </button>
-        //         </div>
-        //     `;
-        // }
-        // If it's the last task (e.g. task 8), add certificate button
-        // if (taskIndex === tasks.length - 1) {
-        //     quizHTML += `
-        //         <div class="text-center mt-4">
-        //             <button id="downloadCertBtn" class="btn btn-outline-secondary fw-semibold"
-        //                 disabled
-        //                 data-bs-toggle="tooltip"
-        //                 title="Complete all tasks to unlock your certificate.">
-        //                 <i class="fas fa-file-download fa-lg me-2"></i> Download Certificate
-        //             </button>
-        //         </div>
-        //     `;
-        // }
         if (taskIndex === tasks.length - 1) {
             quizHTML += `
                 <div class="text-center mt-4">
@@ -583,50 +556,6 @@ function updateProgress() {
     // Check for new badge unlocks
     updateBadge(progressPercent);
 
-    // Check if all tasks are completed
-    // const certBtn = document.getElementById("downloadCertBtn");
-    // if (certBtn) {
-    //     if (progressPercent === 100) {
-    //         certBtn.disabled = false;
-    //         certBtn.classList.remove("btn-outline-secondary");
-    //         certBtn.classList.add("btn-outline-success");
-    //         certBtn.removeAttribute("title");
-    //         certBtn.removeAttribute("data-bs-toggle");
-
-    //         // Remove Bootstrap tooltip (cleanly)
-    //         const tooltipInstance = bootstrap.Tooltip.getInstance(certBtn);
-    //         if (tooltipInstance) tooltipInstance.dispose();
-    //     } else {
-    //         certBtn.disabled = true;
-    //         certBtn.classList.remove("btn-outline-success");
-    //         certBtn.classList.add("btn-outline-secondary");
-    //         certBtn.setAttribute("data-bs-toggle", "tooltip");
-    //         certBtn.setAttribute("title", "Complete all tasks to unlock your certificate.");
-    //     }
-    // }
-    // const certBtn = document.getElementById("downloadCertBtn");
-    // if (certBtn) {
-    //     // Remove any existing tooltip first
-    //     const oldTooltip = bootstrap.Tooltip.getInstance(certBtn);
-    //     if (oldTooltip) oldTooltip.dispose();
-
-    //     if (progressPercent === 100) {
-    //         certBtn.disabled = false;
-    //         certBtn.classList.remove("btn-outline-secondary");
-    //         certBtn.classList.add("btn-outline-success");
-    //         certBtn.setAttribute("data-bs-toggle", "tooltip");
-    //         certBtn.setAttribute("title", "Click to download your Certificate of Completion.");
-    //     } else {
-    //         certBtn.disabled = true;
-    //         certBtn.classList.remove("btn-outline-success");
-    //         certBtn.classList.add("btn-outline-secondary");
-    //         certBtn.setAttribute("data-bs-toggle", "tooltip");
-    //         certBtn.setAttribute("title", "Complete all tasks to unlock your certificate.");
-    //     }
-
-    //     // Reinitialize tooltip
-    //     new bootstrap.Tooltip(certBtn);
-    // }
     const certBtn = document.getElementById("downloadCertBtn");
     const certWrapper = document.getElementById("certTooltipWrapper");
 
@@ -667,8 +596,7 @@ function updateBadge(percent) {
     let newBadge = "";
     let badgeHTML = "";
 
-    // Badge thresholds
-    // const prefix = moduleType === "Insider Threats" ? "Insider Threats" : "Phishing Forensics";
+
     const prefix = labTitle.replace(/ Lab$/, "");
 
 
@@ -700,15 +628,6 @@ function updateBadge(percent) {
         }
     }
 
-    // Trigger confetti once at full completion
-    // if (percent === 100 && !hasCelebrated) {
-    //     hasCelebrated = true;
-    //     confetti({
-    //         particleCount: 150,
-    //         spread: 90,
-    //         origin: { y: 0.6 }
-    //     });
-    // }
     if (percent === 100 && !hasCelebrated) {
         hasCelebrated = true;
 
@@ -1082,12 +1001,6 @@ window.addEventListener("beforeunload", function (e) {
 
 
 // Wait for tasks to render before attaching the button
-// document.addEventListener("click", function (e) {
-//     if (e.target && e.target.id === "downloadCertBtn") {
-//         showCertificatePrompt();
-//     }
-// });
-
 document.addEventListener("click", function (e) {
     if (e.target && e.target.id === "downloadCertBtn") {
         if (e.target.disabled) return; // extra safeguard
@@ -1096,14 +1009,6 @@ document.addEventListener("click", function (e) {
 });
 
 
-// function showCertificatePrompt() {
-//     const userName = prompt("Enter your full name for the certificate:");
-//     if (!userName || userName.trim() === "") {
-//         alert("Please enter a valid name.");
-//         return;
-//     }
-//     generateCertificate(userName.trim());
-// }
 function showCertificatePrompt() {
     const userName = prompt("Enter your full name for the certificate:");
     if (!userName || userName.trim() === "") {
@@ -1113,7 +1018,7 @@ function showCertificatePrompt() {
 
     const trimmed = userName.trim();
 
-    // ✅ Only allow letters and spaces (no digits or symbols)
+    // Only allow letters and spaces (no digits or symbols)
     if (!/^[A-Za-z\s]+$/.test(trimmed)) {
         alert("Name should only contain letters and spaces. No numbers or special characters.");
         return;
@@ -1124,455 +1029,6 @@ function showCertificatePrompt() {
 
 // Track how many times certificate has been downloaded
 let certificateDownloadCount = parseInt(localStorage.getItem("certDownloadCount")) || 0;
-
-
-
-// function generateCertificate(userName) {
-//     const { jsPDF } = window.jspdf;
-//     if (!jsPDF) {
-//         alert("Certificate library failed to load. Please check your internet connection.");
-//         return;
-//     }
-//     const doc = new jsPDF({
-//         orientation: "landscape",
-//         unit: "pt",
-//         format: "a4"
-//     });
-
-//     doc.setFillColor(245, 245, 245);
-//     doc.rect(0, 0, doc.internal.pageSize.width, doc.internal.pageSize.height, 'F');
-
-//     doc.setDrawColor(0, 0, 0);
-//     doc.setLineWidth(4);
-//     doc.rect(20, 20, doc.internal.pageSize.width - 40, doc.internal.pageSize.height - 40);
-
-//     doc.setFont("helvetica", "bold");
-//     doc.setFontSize(30);
-//     doc.text("CyberSleuth Academy", doc.internal.pageSize.width / 2, 100, { align: "center" });
-
-//     doc.setFontSize(18);
-//     doc.text("Certificate of Completion", doc.internal.pageSize.width / 2, 150, { align: "center" });
-
-//     doc.setFont("times", "italic");
-//     doc.setFontSize(26);
-//     doc.text(userName, doc.internal.pageSize.width / 2, 220, { align: "center" });
-
-//     doc.setFont("helvetica", "normal");
-//     doc.setFontSize(16);
-//     doc.text("Has successfully completed the Phishing Forensics Lab", doc.internal.pageSize.width / 2, 260, { align: "center" });
-
-//     doc.setFontSize(14);
-//     doc.text("Temasek Polytechnic – Cybersecurity & Digital Forensics", doc.internal.pageSize.width / 2, 310, { align: "center" });
-
-//     const today = new Date().toLocaleDateString();
-//     doc.setFontSize(12);
-//     doc.text(`Issued on: ${today}`, doc.internal.pageSize.width - 100, doc.internal.pageSize.height - 50, { align: "right" });
-
-//     doc.save(`${userName.replace(/\s+/g, "_")}_Phishing_Certificate.pdf`);
-// }
-
-
-// function generateCertificate(userName) {
-//     const { jsPDF } = window.jspdf;
-//     if (!jsPDF) {
-//         alert("Certificate library failed to load. Please check your internet connection.");
-//         return;
-//     }
-
-//     // Increment and store download count
-//     certificateDownloadCount++;
-//     localStorage.setItem("certDownloadCount", certificateDownloadCount);
-
-//     const doc = new jsPDF({
-//         orientation: "landscape",
-//         unit: "pt",
-//         format: "a4"
-//     });
-
-//     doc.setFillColor(245, 245, 245);
-//     doc.rect(0, 0, doc.internal.pageSize.width, doc.internal.pageSize.height, 'F');
-
-//     doc.setDrawColor(0, 0, 0);
-//     doc.setLineWidth(4);
-//     doc.rect(20, 20, doc.internal.pageSize.width - 40, doc.internal.pageSize.height - 40);
-
-//     doc.setFont("helvetica", "bold");
-//     doc.setFontSize(30);
-//     doc.text("CyberSleuth Academy", doc.internal.pageSize.width / 2, 100, { align: "center" });
-
-//     doc.setFontSize(18);
-//     doc.text("Certificate of Completion", doc.internal.pageSize.width / 2, 150, { align: "center" });
-
-//     doc.setFont("times", "italic");
-//     doc.setFontSize(26);
-//     doc.text(userName, doc.internal.pageSize.width / 2, 220, { align: "center" });
-
-//     doc.setFont("helvetica", "normal");
-//     doc.setFontSize(16);
-//     doc.text("Has successfully completed the Phishing Forensics Lab", doc.internal.pageSize.width / 2, 260, { align: "center" });
-
-//     doc.setFontSize(14);
-//     doc.text("Temasek Polytechnic – Cybersecurity & Digital Forensics", doc.internal.pageSize.width / 2, 310, { align: "center" });
-
-//     // Issued date
-//     const today = new Date().toLocaleDateString();
-//     doc.setFontSize(12);
-//     doc.text(`Issued on: ${today}`, doc.internal.pageSize.width - 100, doc.internal.pageSize.height - 50, { align: "right" });
-
-//     // Certificate download count
-//     doc.setFontSize(12);
-//     doc.text(`Download Count: ${certificateDownloadCount}`, 40, doc.internal.pageSize.height - 50); // Bottom-left
-
-//     doc.save(`${userName.replace(/\s+/g, "_")}_Phishing_Certificate.pdf`);
-// }
-
-//enhanced version above is main version but not look good but logic crct
-// function generateCertificate(userName) {
-//     const { jsPDF } = window.jspdf;
-//     if (!jsPDF) {
-//         alert("Certificate library failed to load. Please check your internet connection.");
-//         return;
-//     }
-
-//     certificateDownloadCount++;
-//     localStorage.setItem("certDownloadCount", certificateDownloadCount);
-
-//     const doc = new jsPDF({
-//         orientation: "landscape",
-//         unit: "pt",
-//         format: "a4"
-//     });
-
-//     const width = doc.internal.pageSize.width;
-//     const height = doc.internal.pageSize.height;
-
-//     // ===== Blue Header Bar =====
-//     doc.setFillColor(33, 106, 203); // Bootstrap blue
-//     doc.rect(0, 0, width, 100, 'F');
-
-//     // ===== Academy Name in Header =====
-//     doc.setFont("helvetica", "bold");
-//     doc.setFontSize(26);
-//     doc.setTextColor(255, 255, 255);
-//     doc.text("CyberSleuth Academy", 50, 60);
-
-//     // ===== Title =====
-//     doc.setFontSize(20);
-//     doc.setTextColor(33, 106, 203);
-//     doc.text("Certificate of Completion", width / 2, 160, { align: "center" });
-
-//     // ===== User Name =====
-//     doc.setFont("times", "bolditalic");
-//     doc.setFontSize(40);
-//     doc.setTextColor(0, 0, 0);
-//     doc.text(userName, width / 2, 220, { align: "center" });
-
-//     // ===== Description =====
-//     doc.setFont("helvetica", "normal");
-//     doc.setFontSize(16);
-//     doc.text("Has successfully completed the Phishing Forensics Lab", width / 2, 260, { align: "center" });
-
-//     // doc.setFontSize(14);
-//     // doc.text("Temasek Polytechnic – Cybersecurity & Digital Forensics", width / 2, 290, { align: "center" });
-
-//     // ===== Grey Footer Bar =====
-//     doc.setFillColor(240, 240, 240);
-//     doc.rect(0, height - 60, width, 60, 'F');
-
-//     doc.setFontSize(12);
-//     doc.setTextColor(0, 0, 0);
-//     doc.text(`Download Count: ${certificateDownloadCount}`, 40, height - 30);
-
-//     const today = new Date().toLocaleDateString("en-GB");
-//     doc.text(`Issued on: ${today}`, width - 50, height - 30, { align: "right" });
-
-//     doc.save(`${userName.replace(/\s+/g, "_")}_Phishing_Certificate.pdf`);
-// }
-
-//final version
-// function generateCertificate(userName) {
-//     const { jsPDF } = window.jspdf;
-//     if (!jsPDF) {
-//         alert("Certificate library failed to load. Please check your internet connection.");
-//         return;
-//     }
-
-//     certificateDownloadCount++;
-//     localStorage.setItem("certDownloadCount", certificateDownloadCount);
-
-//     const doc = new jsPDF({
-//         orientation: "landscape",
-//         unit: "pt",
-//         format: "a4"
-//     });
-
-//     const width = doc.internal.pageSize.width;
-//     const height = doc.internal.pageSize.height;
-
-//     // ===== Background =====
-//     doc.setFillColor(255, 253, 245); // Light ivory tone
-//     doc.rect(0, 0, width, height, 'F');
-
-//     // ===== Header Bar =====
-//     doc.setFillColor(33, 106, 203); // Bootstrap blue
-//     doc.rect(0, 0, width, 80, 'F');
-
-//     // ===== Academy Name =====
-//     doc.setFont("helvetica", "bold");
-//     doc.setFontSize(26);
-//     doc.setTextColor(255, 255, 255);
-//     doc.text("CyberSleuth Academy", 50, 50);
-
-//     // ===== Title =====
-//     doc.setFont("helvetica", "bold");
-//     doc.setFontSize(40);
-//     doc.setTextColor(40, 40, 40); // Dark gray
-//     doc.text("CERTIFICATE", width / 2, 150, { align: "center" });
-
-//     // ===== Subtitle =====
-//     doc.setFontSize(20);
-//     doc.text("OF COMPLETION", width / 2, 180, { align: "center" });
-
-//     // ===== Presented To =====
-//     doc.setFont("helvetica", "normal");
-//     doc.setFontSize(16);
-//     doc.text("This Certificate is presented to", width / 2, 230, { align: "center" });
-
-//     // ===== User Name =====
-//     doc.setFont("times", "bolditalic");
-//     doc.setFontSize(32);
-//     doc.text(userName, width / 2, 270, { align: "center" });
-
-
-//     // ===== Achievement Description =====
-//     doc.setFont("helvetica", "normal");
-//     doc.setFontSize(16);
-//     doc.text("For successfully completing the Phishing Forensics Lab", width / 2, 320, { align: "center" });
-
-//     // ===== Footer Background =====
-//     doc.setFillColor(240, 240, 240); // Light gray
-//     doc.rect(0, height - 60, width, 60, 'F');
-
-//     // ===== Footer Info =====
-//     doc.setFontSize(12);
-//     doc.setTextColor(50, 50, 50);
-
-//     const today = new Date().toLocaleDateString("en-GB");
-//     doc.text(`Issued on: ${today}`, width - 50, height - 30, { align: "right" });
-
-//     // Generate alphanumerical Certificate ID
-//     const certId = "CSA-" + Array.from({ length: 8 }, () => "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"[Math.floor(Math.random() * 36)]).join('');
-//     doc.text(`Certificate ID: ${certId}`, 40, height - 45);
-
-//     doc.text(`Download Count: ${certificateDownloadCount}`, 40, height - 30);
-
-//     doc.save(`${userName.replace(/\s+/g, "_")}_Phishing_Certificate.pdf`);
-// }
-
-//final version
-// function generateCertificate(userName) {
-//     const { jsPDF } = window.jspdf;
-//     if (!jsPDF) {
-//         alert("Certificate library failed to load. Please check your internet connection.");
-//         return;
-//     }
-
-//     // ===== Check name length =====
-//     if (userName.length > 40) {
-//         alert("The name entered is too long. \n\nPlease enter a shorter version of your name (ideally under 40 characters).");
-//         return;
-//     }
-
-
-//     // ===== Get lab name from meta tag =====
-//     const metaTag = document.querySelector('meta[name="lab-title"]');
-//     const labTitle = metaTag ? metaTag.content : "Cybersecurity Lab"; // fallback if missing
-
-//     certificateDownloadCount++;
-//     localStorage.setItem("certDownloadCount", certificateDownloadCount);
-
-//     const doc = new jsPDF({
-//         orientation: "landscape",
-//         unit: "pt",
-//         format: "a4"
-//     });
-
-//     const width = doc.internal.pageSize.width;
-//     const height = doc.internal.pageSize.height;
-
-//     // ===== Background =====
-//     doc.setFillColor(255, 253, 245); // Light ivory tone
-//     doc.rect(0, 0, width, height, 'F');
-
-//     // ===== Header Bar =====
-//     doc.setFillColor(33, 106, 203); // Bootstrap blue
-//     doc.rect(0, 0, width, 80, 'F');
-
-//     // ===== Academy Logo and Name =====
-//     const logoX = 50;
-//     const logoY = 25;
-//     const logoSize = 30;
-
-//     doc.addImage(cyberSleuthIcon, "PNG", logoX, logoY, logoSize, logoSize); // icon
-
-//     doc.setFont("helvetica", "bold");
-//     doc.setFontSize(26);
-//     doc.setTextColor(255, 255, 255);
-//     doc.text("CyberSleuth Academy", logoX + logoSize + 10, 50); // text beside icon
-
-
-//     // ===== Title =====
-//     doc.setFont("helvetica", "bold");
-//     doc.setFontSize(40);
-//     doc.setTextColor(40, 40, 40); // Dark gray
-//     doc.text("CERTIFICATE", width / 2, 150, { align: "center" });
-
-//     // ===== Subtitle =====
-//     doc.setFontSize(20);
-//     doc.text("OF COMPLETION", width / 2, 180, { align: "center" });
-
-//     // ===== Presented To =====
-//     doc.setFont("helvetica", "normal");
-//     doc.setFontSize(16);
-//     doc.text("This Certificate is presented to", width / 2, 230, { align: "center" });
-
-//     // ===== User Name =====
-//     doc.setFont("times", "bolditalic");
-//     doc.setFontSize(32);
-//     doc.text(userName, width / 2, 270, { align: "center" });
-
-//     // ===== Achievement Description (with dynamic lab name) =====
-//     doc.setFont("helvetica", "normal");
-//     doc.setFontSize(16);
-//     doc.text(`For successfully completing the ${labTitle}`, width / 2, 320, { align: "center" });
-
-//     // ===== Footer Background =====
-//     doc.setFillColor(240, 240, 240); // Light gray
-//     doc.rect(0, height - 60, width, 60, 'F');
-
-//     // ===== Footer Info =====
-//     doc.setFontSize(12);
-//     doc.setTextColor(50, 50, 50);
-
-//     const today = new Date().toLocaleDateString("en-GB");
-//     doc.text(`Issued on: ${today}`, width - 50, height - 30, { align: "right" });
-
-//     // Generate alphanumerical Certificate ID
-//     const certId = "CSA-" + Array.from({ length: 8 }, () =>
-//         "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"[Math.floor(Math.random() * 36)]
-//     ).join('');
-//     doc.text(`Certificate ID: ${certId}`, 40, height - 45);
-
-//     doc.text(`Download Count: ${certificateDownloadCount}`, 40, height - 30);
-
-//     // ===== Save with correct lab name in filename =====
-//     const cleanLabName = labTitle.toLowerCase().replace(/\s+/g, "_").replace(/[^\w]/g, "");
-//     doc.save(`${userName.replace(/\s+/g, "_")}_${cleanLabName}_certificate.pdf`);
-// }
-
-
-// function generateCertificate(userName) {
-//     const { jsPDF } = window.jspdf;
-//     if (!jsPDF) {
-//         alert("Certificate library failed to load. Please check your internet connection.");
-//         return;
-//     }
-
-//     // ===== Check name length =====
-//     if (userName.length > 40) {
-//         alert("The name entered is too long. \n\nPlease enter a shorter version of your name (ideally under 40 characters).");
-//         return;
-//     }
-
-
-//     // ===== Get lab name from meta tag =====
-//     const metaTag = document.querySelector('meta[name="lab-title"]');
-//     const labTitle = metaTag ? metaTag.content : "Cybersecurity Lab"; // fallback if missing
-
-//     const labKey = `certDownloadCount_${labTitle}`;
-//     let certificateDownloadCount = parseInt(localStorage.getItem(labKey)) || 0;
-//     certificateDownloadCount++;
-//     localStorage.setItem(labKey, certificateDownloadCount);
-
-
-//     const doc = new jsPDF({
-//         orientation: "landscape",
-//         unit: "pt",
-//         format: "a4"
-//     });
-
-//     const width = doc.internal.pageSize.width;
-//     const height = doc.internal.pageSize.height;
-
-//     // ===== Background =====
-//     doc.setFillColor(255, 253, 245); // Light ivory tone
-//     doc.rect(0, 0, width, height, 'F');
-
-//     // ===== Header Bar =====
-//     doc.setFillColor(33, 106, 203); // Bootstrap blue
-//     doc.rect(0, 0, width, 80, 'F');
-
-//     // ===== Academy Logo and Name =====
-//     const logoX = 50;
-//     const logoY = 25;
-//     const logoSize = 30;
-
-//     doc.addImage(cyberSleuthIcon, "PNG", logoX, logoY, logoSize, logoSize); // icon
-
-//     doc.setFont("helvetica", "bold");
-//     doc.setFontSize(26);
-//     doc.setTextColor(255, 255, 255);
-//     doc.text("CyberSleuth Academy", logoX + logoSize + 10, 50); // text beside icon
-
-
-//     // ===== Title =====
-//     doc.setFont("helvetica", "bold");
-//     doc.setFontSize(40);
-//     doc.setTextColor(40, 40, 40); // Dark gray
-//     doc.text("CERTIFICATE", width / 2, 150, { align: "center" });
-
-//     // ===== Subtitle =====
-//     doc.setFontSize(20);
-//     doc.text("OF COMPLETION", width / 2, 180, { align: "center" });
-
-//     // ===== Presented To =====
-//     doc.setFont("helvetica", "normal");
-//     doc.setFontSize(16);
-//     doc.text("This Certificate is presented to", width / 2, 230, { align: "center" });
-
-//     // ===== User Name =====
-//     doc.setFont("times", "bolditalic");
-//     doc.setFontSize(32);
-//     doc.text(userName, width / 2, 270, { align: "center" });
-
-//     // ===== Achievement Description (with dynamic lab name) =====
-//     doc.setFont("helvetica", "normal");
-//     doc.setFontSize(16);
-//     doc.text(`For successfully completing the ${labTitle}`, width / 2, 320, { align: "center" });
-
-//     // ===== Footer Background =====
-//     doc.setFillColor(240, 240, 240); // Light gray
-//     doc.rect(0, height - 60, width, 60, 'F');
-
-//     // ===== Footer Info =====
-//     doc.setFontSize(12);
-//     doc.setTextColor(50, 50, 50);
-
-//     const today = new Date().toLocaleDateString("en-GB");
-//     doc.text(`Issued on: ${today}`, width - 50, height - 30, { align: "right" });
-
-//     // Generate alphanumerical Certificate ID
-//     const certId = "CSA-" + Array.from({ length: 8 }, () =>
-//         "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"[Math.floor(Math.random() * 36)]
-//     ).join('');
-//     doc.text(`Certificate ID: ${certId}`, 40, height - 45);
-
-//     doc.text(`Download Count: ${certificateDownloadCount}`, 40, height - 30);
-
-//     // ===== Save with correct lab name in filename =====
-//     const cleanLabName = labTitle.toLowerCase().replace(/\s+/g, "_").replace(/[^\w]/g, "");
-//     doc.save(`${userName.replace(/\s+/g, "_")}_${cleanLabName}_certificate.pdf`);
-// }
 
 
 function generateCertificate(userName) {
@@ -1589,11 +1045,6 @@ function generateCertificate(userName) {
     }
 
 
-    // ===== Get lab name from meta tag =====
-    // const metaTag = document.querySelector('meta[name="lab-title"]');
-    // const labTitle = metaTag ? metaTag.content : "Cybersecurity Lab"; // fallback if missing
-
-    // const labKey = `certDownloadCount_${labTitle}`;
     let certificateDownloadCount = parseInt(localStorage.getItem(labKey)) || 0;
     certificateDownloadCount++;
     localStorage.setItem(labKey, certificateDownloadCount);
