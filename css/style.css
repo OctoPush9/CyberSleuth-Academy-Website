@@ -1,8 +1,8 @@
-/* =======================================
-   CyberSleuth Academy - Main Stylesheet
+/* =============================================================
+   CyberSleuth Academy - Main Stylesheet Exclusively For Quiz Pages
    Includes light & dark mode styling
    Easy to read, reuse, edit
-======================================= */
+================================================================ */
 
 
 /* === COLORS: Base theme colors === */
@@ -39,10 +39,7 @@ body {
     transition: 0.3s;
 }
 
-.navbar {
-    /* Simple shadow for navbar */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
+
 
 /* === TASK CARDS === */
 .task-card {
@@ -119,9 +116,7 @@ body {
     color: var(--dark-text);
 }
 
-.dark-mode .navbar {
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-}
+
 
 .dark-mode .card,
 .dark-mode .tool-card,
@@ -143,11 +138,6 @@ body {
 .dark-mode .task-card .card-footer {
     border-top: 1px solid var(--dark-text);
 }
-
-/* .dark-mode .tool-card {
-    background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
-} */
-
 
 .dark-mode .points-badge-bar {
     background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%);
@@ -188,15 +178,7 @@ body {
     color: #f0f0f0 !important;
 }
 
-.dark-mode .settings-modal .modal-content,
-.dark-mode .settings-modal .modal-header,
-.dark-mode .settings-modal .modal-body,
-.dark-mode .settings-modal .modal-footer,
-.dark-mode .settings-modal .modal-title {
-    background-color: #1f1f1f !important;
-    color: #f0f0f0 !important;
-    border-color: #333;
-}
+
 
 /* === DARK MODE TOGGLE SWITCH === */
 .theme-toggle {
@@ -364,4 +346,59 @@ body {
     transition: opacity 0.3s ease;
     opacity: 1 !important;
     visibility: visible !important;
+}
+
+/* === Download cert btn style === */
+#downloadCertBtn {
+    border-width: 2px;
+    font-size: 1rem;
+    padding: 0.6rem 1.2rem;
+}
+
+#downloadCertBtn:hover {
+    background-color: #198754;
+    /* Bootstrap green */
+    color: #fff;
+}
+
+/* ========================================
+   NAVBAR Standardisation Styles
+======================================== */
+.navbar {
+    /* Simple shadow for navbar */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode .navbar {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+body.lab-page .settings-dropdown {
+    display: block !important;
+    /* Settings only available for Lab/Quiz pages */
+}
+
+/* Fix placeholder visibility inside dark search bar */
+.form-control::placeholder {
+    color: #cccccc !important;
+    /* Light grey placeholder */
+    opacity: 1;
+    /* Ensure it's visible in all browsers */
+}
+
+.navbar {
+    border-bottom: 4px solid #00ff00 !important;
+}
+
+/* ========================================
+   SETTINGS RELATED STYLES
+======================================== */
+.dark-mode .settings-modal .modal-content,
+.dark-mode .settings-modal .modal-header,
+.dark-mode .settings-modal .modal-body,
+.dark-mode .settings-modal .modal-footer,
+.dark-mode .settings-modal .modal-title {
+    background-color: #1f1f1f !important;
+    color: #f0f0f0 !important;
+    border-color: #333;
 }
