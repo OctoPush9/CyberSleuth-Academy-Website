@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/images/cybersleuth-icon.png" type="image/png">
+    <title>CyberSleuth Academy Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css ">
+    <link rel="stylesheet" href="css/leaderboard.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <img src="assets/images/cybersleuth-icon.png" alt="CyberSleuth Academy Logo" class="logo"> CyberSleuth Academy
+            <nav>
+                <a href="home.html">Simulation Rooms</a>
+                <a href="learn.html">Learn</a>
+                <a href="leaderboard.html" class="active">Compete</a>
+                <a href="quiz.html">Content</a>
+            </nav>
+        </div>
+        <div class="header-right">
+            <div class="search-container">
+                <input type="text" placeholder="Search..." class="search-bar">
+                <i class="fa fa-search search-icon"></i>
+            </div>
+            <div class="notifications">
+                <i class="fa-solid fa-bell" style="color: #ffffff;"></i>
+                <span class="badge">1</span>
+            </div>
+            <div class="user-profile">
+                <i class="fa-solid fa-user" style="color: #ffffff;"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="leaderboard-section">
+            <h1 class="leaderboard-title">Leaderboards</h1>
+            <p class="leaderboard-welcome">Welcome to the wall of fame - Here are some of our top users.</p>
+
+            <div class="filters">
+                <button class="filter-button active" data-period="all-time">General</button>
+                <button class="filter-button" data-period="monthly">All time</button>
+                <select class="filter-select" id="countryFilter">
+                    <option value="all">All countries</option>
+                    <option value="US">US</option>
+                    <option value="UK">UK</option>
+                    <option value="SG">SG</option>
+                </select>
+            </div>
+
+            <div class="top-users">
+                <!-- Top users will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Leaderboard Table -->
+        <div class="table-container">
+            <table class="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Username</th>
+                        <th>Country</th>
+                        <th>Points</th>
+                        <th>Rooms</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboardBody">
+                    <!-- Table rows will be populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer class="footer mt-auto">
+      <div>
+        <p>© 2025 CyberSleuth Academy. Developed by TP Cybersecurity & Digital Forensics Students.</p>
+        <p class="mb-0">All content is for educational purposes only.</p>
+      </div>
+    </footer>
+
+    <script>
+        // Sample user data (only General/All Time users, no Weekly)
+        const userData = [
+            { rank: 1, username: "Jack", points: 200, rooms: 2, country: "US", profilePic: "user1.jpg", period: "all-time" },
+            { rank: 2, username: "John", points: 199, rooms: 2, country: "UK", profilePic: "user2.jpg", period: "all-time" },
+            { rank: 3, username: "Tim", points: 198, rooms: 2, country: "SG", profilePic: "user3.jpg", period: "all-time" },
+            { rank: 4, username: "Jane", points: 197, rooms: 2, country: "US", profilePic: "user4.jpg", period: "all-time" },
+            { rank: 5, username: "Mary", points: 196, rooms: 2, country: "US", profilePic: "user5.jpg", period: "all-time" },
+            { rank: 6, username: "Tom", points: 195, rooms: 2, country: "SG", profilePic: "user6.jpg", period: "monthly" },
+            { rank: 7, username: "Harry", points: 194, rooms: 2, country: "SG", profilePic: "user7.jpg", period: "monthly" },
+            { rank: 8, username: "Thomas", points: 193, rooms: 2, country: "SG", profilePic: "user8.jpg", period: "monthly" },
+            { rank: 9, username: "Angel", points: 192, rooms: 2, country: "US", profilePic: "user9.jpg", period: "monthly" },
+            { rank: 10, username: "Bob", points: 190, rooms: 2, country: "US", profilePic: "user10.jpg", period: "monthly" }
+        ];
+
+        // DOM elements
+        const filterButtons = document.querySelectorAll('.filter-button');
+        const countryFilter = document.getElementById('countryFilter');
+        const leaderboardBody = document.getElementById('leaderboardBody');
+        const topUsersContainer = document.querySelector('.top-users');
+
+        // Current filter state
+        let currentPeriod = 'all-time';
+        let currentCountry = 'all';
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add event listeners to filter buttons
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    // Update current period
+                    currentPeriod = button.dataset.period || 'all-time';
+                    
+                    // Apply filters
+                    applyFilters();
+                });
+            });
+            
+            // Add event listener to country filter
+            countryFilter.addEventListener('change', () => {
+                currentCountry = countryFilter.value;
+                applyFilters();
+            });
+            
+            // Initial render
+            applyFilters();
+        });
+
+        // Apply filters and update the leaderboard
+        function applyFilters() {
+            // Filter data based on current selections
+            let filteredData = userData.filter(user => {
+                // Filter by period
+                if (currentPeriod !== 'all-time' && user.period !== currentPeriod) {
+                    return false;
+                }
+                
+                // Filter by country
+                if (currentCountry !== 'all' && user.country !== currentCountry) {
+                    return false;
+                }
+                
+                return true;
+            });
+            
+            // Sort by points (descending)
+            filteredData.sort((a, b) => b.points - a.points);
+            
+            // Update ranks
+            filteredData.forEach((user, index) => {
+                user.rank = index + 1;
+            });
+            
+            // Get top users (first 5)
+            const topUsers = filteredData.slice(0, 5);
+            
+            // Render top users
+            renderTopUsers(topUsers);
+            
+            // Render table rows (excluding top users)
+            renderTableRows(filteredData, topUsers);
+        }
+
+        // Render top users section
+        function renderTopUsers(users) {
+            topUsersContainer.innerHTML = '';
+            
+            if (users.length === 0) {
+                topUsersContainer.innerHTML = '<p class="no-users">No users match the current filters.</p>';
+                return;
+            }
+            
+            users.forEach(user => {
+                const topUserElement = document.createElement('div');
+                topUserElement.className = 'top-user';
+                topUserElement.innerHTML = `
+                    <span class="rank">${user.rank}</span>
+                    <img src="${user.profilePic}" alt="${user.username}" class="profile-pic">
+                    <div class="user-info">
+                        <h3>${user.username}</h3>
+                        <p>Points: ${user.points}</p>
+                        <p>Rooms in: ${user.rooms}</p>
+                        <p>Country: ${user.country}</p>
+                    </div>
+                `;
+                topUsersContainer.appendChild(topUserElement);
+            });
+        }
+
+        // Render table rows
+        function renderTableRows(allUsers, topUsers) {
+            leaderboardBody.innerHTML = '';
+            
+            // Create a set of top user usernames for quick lookup
+            const topUsernames = new Set(topUsers.map(user => user.username));
+            
+            // Filter out top users from the table data
+            const tableUsers = allUsers.filter(user => !topUsernames.has(user.username));
+            
+            if (tableUsers.length === 0) {
+                const row = document.createElement('tr');
+                row.innerHTML = '<td colspan="5" class="no-data">No additional users match the current filters.</td>';
+                leaderboardBody.appendChild(row);
+                return;
+            }
+            
+            tableUsers.forEach(user => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${user.rank}</td>
+                    <td><img src="${user.profilePic}" alt="${user.username}" class="profile-pic-small"> ${user.username}</td>
+                    <td>${user.country}</td>
+                    <td>${user.points}</td>
+                    <td>${user.rooms}</td>
+                `;
+                leaderboardBody.appendChild(row);
+            });
+        }
+    </script>
+</body>
+</html>
