@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insider Threat Simulation</title>
+  <link rel="stylesheet" href="css/hidden.css">
+</head>
+<body oncontextmenu="return false;">
+
+  <h1>Insider Threat Simulation</h1>
+
+  <div class="video-container">
+    <video id="video" controls>
+      <source src="test1.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <!-- Choice Buttons -->
+  <div id="choices1" class="choices hidden">
+    <button onclick="chooseOption(1,'A')">Contact the Employee</button>
+    <button href="forensics_analysis.html">Investigate Further</button>
+    <button onclick="chooseOption(1,'C')">Ignore the Alert</button>
+  </div>
+
+  <!-- Contact Employee -->
+  <div id="choices2" class="choices hidden">
+    <button onclick="window.location.href='forensics_analysis.html'">Investigate Further</button>
+  </div>
+
+  <!-- Ignore the alert -->
+  <div id="choices3" class="choices hidden">
+    <button onclick="window.location.href='forensics_analysis.html'">Proceed to Forensics</button>
+  </div>
+
+  <footer>
+    &copy; 2025 CyberSleuth Academy
+  </footer>
+
+  <script src="insider_threat.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+/* hidden.css */
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+h1 {
+  font-size: clamp(20px, 5vw, 24px);
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.video-container {
+  width: auto;
+  max-width: 1000px;
+  margin-bottom: 25px;
+}
+
+video {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.choices button,
+.choices a button {
+  padding: 12px 24px;
+  font-size: clamp(14px, 4vw, 16px);
+  background-color: #007bff;
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  min-width: 30%;
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+.choices button:hover,
+.choices a button:hover {
+  background-color: #0056b3;
+}
+
+.hidden {
+  display: none;
+}
+
+footer {
+  margin-top: auto;
+  font-size: clamp(12px, 4vw, 14px);
+  color: #999;
+  margin-bottom: 20px;
+}
