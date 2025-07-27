@@ -1124,3 +1124,13 @@ function generateCertificate(userName) {
     const cleanLabName = labTitle.toLowerCase().replace(/\s+/g, "_").replace(/[^\w]/g, "");
     doc.save(`${userName.replace(/\s+/g, "_")}_${cleanLabName}_certificate.pdf`);
 }
+
+// Gently highlight "Content" tab when on lab pages
+document.addEventListener("DOMContentLoaded", () => {
+    if (document.body.classList.contains("lab-page")) {
+        const contentTab = document.querySelector('.nav-link[href="quiz.html"]');
+        if (contentTab) {
+            contentTab.classList.add("lab-highlight");
+        }
+    }
+});

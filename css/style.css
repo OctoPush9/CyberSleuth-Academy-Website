@@ -390,6 +390,17 @@ body.lab-page .settings-dropdown {
     border-bottom: 4px solid #00ff00 !important;
 } */
 
+/* === Subtle, smooth highlight for active nav on lab pages === */
+body.lab-page .navbar-nav .nav-link.lab-highlight {
+    color: #f0f0f0 !important;
+    /* Light grey */
+    font-weight: 600;
+    text-shadow: 0 0 4px rgba(255, 255, 255, 0.15);
+    /* Gentle soft glow */
+    transform: translateY(-1px);
+}
+
+
 /* ========================================
    SETTINGS RELATED STYLES
 ======================================== */
