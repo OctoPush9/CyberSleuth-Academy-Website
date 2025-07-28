@@ -447,6 +447,8 @@ function disableAllRemainingHints() {
 // Updates status badge to "In Progress" when opened
 // ========================================
 function toggleTask(i) {
+    if (!timerInterval) startTimer();
+
     const currentBody = document.getElementById(`taskBody${i}`);
     const currentStatus = document.getElementById(`taskStatus${i}`);
 
@@ -547,7 +549,8 @@ function updateProgress() {
 
     // Update progress label + points UI
     document.querySelector(".progress-label").textContent = `Step ${currentStep} of ${totalSteps}`;
-    document.getElementById("progressText").textContent = `${Math.round(progressPercent)}% Complete`;
+    // document.getElementById("progressText").textContent = `${Math.round(progressPercent)}% Complete`;
+    document.getElementById("progressText").innerHTML = `<i class="fas fa-chart-line me-1 text-primary"></i> <span class="fw-semibold">${Math.round(progressPercent)}% Complete</span>`;
     document.getElementById("pointsDisplay").textContent = score;
 
     // Check for new badge unlocks
@@ -1134,3 +1137,91 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 });
+
+
+
+// ========== TIMER SETUP ==========
+
+let timerInterval;
+let elapsedSeconds = 0;
+
+function formatTime(seconds) {
+    const hrs = Math.floor(seconds / 3600).toString().padStart(2, '0');
+    const mins = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
+    const secs = (seconds % 60).toString().padStart(2, '0');
+    return `${hrs}:${mins}:${secs}`;
+}
+
+function updateTimeDisplay() {
+    const timeDisplay = document.getElementById('timeDisplay');
+    if (timeDisplay) {
+        timeDisplay.textContent = formatTime(elapsedSeconds);
+    }
+}
+
+// function startTimer() {
+//     clearInterval(timerInterval);
+//     elapsedSeconds = 0;
+//     updateTimeDisplay();
+
+//     timerInterval = setInterval(() => {
+//         elapsedSeconds++;
+//         updateTimeDisplay();
+
+//         // Stop timer when all tasks are complete
+//         if (taskCompletion.every(Boolean)) {
+//             clearInterval(timerInterval);
+//         }
+//     }, 1000);
+// }
+
+function startTimer() {
+    clearInterval(timerInterval);
+    elapsedSeconds = 0;
+    updateTimeDisplay();
+
+    // Remove dimming if previously applied
+    document.getElementById("elapsedTime")?.classList.remove("timer-disabled");
+
+    timerInterval = setInterval(() => {
+        elapsedSeconds++;
+        updateTimeDisplay();
+
+        if (taskCompletion.every(Boolean)) {
+            clearInterval(timerInterval);
+            // Dim the timer when done
+            document.getElementById("elapsedTime")?.classList.add("timer-disabled");
+        }
+    }, 1000);
+}
+
+
+// ========== TIMER RESET INTEGRATIONS ==========
+
+// Store reference to original confirmReset
+const originalConfirmReset = window.confirmReset;
+window.confirmReset = function () {
+    originalConfirmReset(); // keep your original logic
+    startTimer(); // restart timer only when progress is reset
+};
+
+// Override applyDifficulty, check for actual difficulty change before timer reset
+const originalApplyDifficulty = window.applyDifficulty;
+window.applyDifficulty = function () {
+    const selectedDiff = document.getElementById("difficultySelect").value;
+
+    // Skip timer reset if same difficulty — original logic already returns early
+    const prevDiff = currentDifficulty;
+
+    originalApplyDifficulty(); // run your existing logic
+
+    // Only restart timer if difficulty was truly changed
+    if (selectedDiff !== prevDiff) {
+        startTimer();
+    }
+};
+
+// Start timer on first page load
+// document.addEventListener('DOMContentLoaded', () => {
+//     startTimer();
+// });

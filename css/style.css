@@ -444,3 +444,9 @@ body.lab-page .navbar-nav .nav-link.lab-highlight {
     color: var(--dark-text);
     border-left-color: var(--success);
 }
+
+.timer-disabled {
+    opacity: 0.5;
+    color: #6c757d !important;
+    /* Bootstrap "text-muted" gray */
+}
