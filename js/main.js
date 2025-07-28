@@ -8,6 +8,8 @@ let hasCelebrated = false;
 let usedHints = 0;
 let maxHintsAllowed = 0;
 let answerStreak = 0;
+let hasOpenedTask = false;
+
 
 // Game progress state
 let currentDifficulty = localStorage.getItem("difficulty") || "Intermediate";
@@ -447,10 +449,14 @@ function disableAllRemainingHints() {
 // Updates status badge to "In Progress" when opened
 // ========================================
 function toggleTask(i) {
-    if (!timerInterval) startTimer();
-
     const currentBody = document.getElementById(`taskBody${i}`);
     const currentStatus = document.getElementById(`taskStatus${i}`);
+    hasOpenedTask = true;
+    if (!timerInterval) startTimer();
+    startCountingTimer(); // Start timer only when any task card is opened
+
+
+
 
     // Close all other task bodies
     document.querySelectorAll("[id^=taskBody]").forEach((el, idx) => {
@@ -609,7 +615,11 @@ function updateBadge(percent) {
     } else if (percent >= 50) {
         newBadge = "bronze";
         badgeHTML = `<span class="badge rounded-pill bg-secondary text-white small">🥉 ${prefix} Rookie</span>`;
+    } else {
+        newBadge = "none";
+        badgeHTML = `<span class="class="fw-semibold small text-dark"">No badges</span>`;
     }
+
 
 
     // Only update if changed
@@ -652,6 +662,10 @@ function updateBadge(percent) {
 // ========================================
 function applyDifficulty() {
     hasCelebrated = false;
+    hasOpenedTask = false;
+
+    isTimerFrozen = false;
+    startTimer();
 
     const selectedDiff = document.getElementById("difficultySelect").value;
 
@@ -775,6 +789,11 @@ function confirmReset() {
     currentStep = 0;
     usedHints = 0;
     answerStreak = 0;
+    hasOpenedTask = false;
+
+    isTimerFrozen = false;
+    startTimer();
+
 
     // Reset task and question tracking
     for (let i = 0; i < tasks.length; i++) {
@@ -993,9 +1012,15 @@ function reloadAllH5P() {
 
 // Alert users not to close or reload browser - progress will not be saved.
 
-window.addEventListener("beforeunload", function (e) {
-    e.preventDefault();
-    e.returnValue = "";
+// window.addEventListener("beforeunload", function (e) {
+//     e.preventDefault();
+//     e.returnValue = "";
+// });
+window.addEventListener('beforeunload', function (e) {
+    if (hasOpenedTask) {
+        e.preventDefault();
+        e.returnValue = '';
+    }
 });
 
 
@@ -1144,6 +1169,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 let timerInterval;
 let elapsedSeconds = 0;
+let isTimerFrozen = false;
+
 
 function formatTime(seconds) {
     const hrs = Math.floor(seconds / 3600).toString().padStart(2, '0');
@@ -1175,13 +1202,95 @@ function updateTimeDisplay() {
 //     }, 1000);
 // }
 
+// function startTimer() {
+//     clearInterval(timerInterval);
+//     elapsedSeconds = 0;
+//     updateTimeDisplay();
+
+//     // Remove dimming if previously applied
+//     document.getElementById("elapsedTime")?.classList.remove("timer-disabled");
+
+//     timerInterval = setInterval(() => {
+//         elapsedSeconds++;
+//         updateTimeDisplay();
+
+//         if (taskCompletion.every(Boolean)) {
+//             clearInterval(timerInterval);
+//             // Dim the timer when done
+//             document.getElementById("elapsedTime")?.classList.add("timer-disabled");
+//         }
+//     }, 1000);
+// }
+// function startTimer() {
+//     clearInterval(timerInterval);
+//     timerInterval = null;
+//     elapsedSeconds = 0;
+//     updateTimeDisplay();
+// }
+// function startTimer() {
+//     clearInterval(timerInterval);
+//     timerInterval = null;
+//     elapsedSeconds = 0;
+//     updateTimeDisplay();
+
+//     // Remove dimming in case it's already applied
+//     document.getElementById("elapsedTime")?.classList.remove("timer-disabled");
+// }
+// function startTimer() {
+//     clearInterval(timerInterval);
+//     timerInterval = null;
+
+//     // 🛑 Don't reset if already completed
+//     if (taskCompletion.every(Boolean)) return;
+
+//     elapsedSeconds = 0;
+//     updateTimeDisplay();
+//     document.getElementById("elapsedTime")?.classList.remove("timer-disabled");
+// }
 function startTimer() {
     clearInterval(timerInterval);
+    timerInterval = null;
+
+    // 🛑 Don't restart if timer is frozen due to task completion
+    if (isTimerFrozen) return;
+
     elapsedSeconds = 0;
     updateTimeDisplay();
-
-    // Remove dimming if previously applied
     document.getElementById("elapsedTime")?.classList.remove("timer-disabled");
+}
+
+// function startCountingTimer() {
+//     if (timerInterval) return; // Prevent double intervals
+
+//     timerInterval = setInterval(() => {
+//         elapsedSeconds++;
+//         updateTimeDisplay();
+
+//         if (taskCompletion.every(Boolean)) {
+//             clearInterval(timerInterval);
+//             timerInterval = null;
+//         }
+//     }, 1000);
+// }
+
+// function startCountingTimer() {
+//     if (timerInterval) return; // Prevent double intervals
+
+//     timerInterval = setInterval(() => {
+//         elapsedSeconds++;
+//         updateTimeDisplay();
+
+//         if (taskCompletion.every(Boolean)) {
+//             clearInterval(timerInterval);
+//             timerInterval = null;
+
+//             // Dim the timer when all tasks are completed
+//             document.getElementById("elapsedTime")?.classList.add("timer-disabled");
+//         }
+//     }, 1000);
+// }
+function startCountingTimer() {
+    if (timerInterval || isTimerFrozen) return; // Prevent start if already done or frozen
 
     timerInterval = setInterval(() => {
         elapsedSeconds++;
@@ -1189,7 +1298,8 @@ function startTimer() {
 
         if (taskCompletion.every(Boolean)) {
             clearInterval(timerInterval);
-            // Dim the timer when done
+            timerInterval = null;
+            isTimerFrozen = true; // ✅ Freeze it
             document.getElementById("elapsedTime")?.classList.add("timer-disabled");
         }
     }, 1000);
@@ -1225,3 +1335,8 @@ window.applyDifficulty = function () {
 // document.addEventListener('DOMContentLoaded', () => {
 //     startTimer();
 // });
+
+// Disable search form functionality (prevents reload)
+document.querySelector('form[role="search"]')?.addEventListener('submit', function (e) {
+    e.preventDefault(); // Stop form from submitting
+});

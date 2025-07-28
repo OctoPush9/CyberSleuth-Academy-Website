@@ -332,6 +332,38 @@ const tasks = [
     <div class="h5p-container my-3">
         <iframe src="assets/h5p/phishing/task5/task5.html" width="100%" height="520" frameborder="0" allowfullscreen></iframe>
     </div>
+
+    <div class="text-center mt-3">
+    <p class="small mb-1" style="color: inherit;">
+        🖼️ Image credits:
+    </p>
+    <p class="small mb-0" style="color: inherit;">
+        <strong>SPF:</strong>
+        <a href="https://medium.com/@neer.s/how-to-fix-weak-spf-sender-policy-framework-policy-0ba6337a5a28"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-decoration-underline">
+        Medium – Neer Sharma
+        </a>
+        |
+        <strong>DKIM:</strong>
+        <a href="https://cdn.prod.website-files.com/60bfd2b558c9eba77e06bf57/60f7282b6c03b385e5e00b7c_DKIM_record_image-01-1024x686.png"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-decoration-underline">
+        ActiveCampaign
+        </a>
+        |
+        <strong>DMARC:</strong>
+        <a href="https://www.proofpoint.com/us/resources/white-papers/dmarc-protect-email-domains"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-decoration-underline">
+        Proofpoint
+        </a>
+    </p>
+    </div>
+
     `,
         quiz: [
             {
