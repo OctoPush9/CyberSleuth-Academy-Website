@@ -1011,11 +1011,6 @@ function reloadAllH5P() {
 }
 
 // Alert users not to close or reload browser - progress will not be saved.
-
-// window.addEventListener("beforeunload", function (e) {
-//     e.preventDefault();
-//     e.returnValue = "";
-// });
 window.addEventListener('beforeunload', function (e) {
     if (hasOpenedTask) {
         e.preventDefault();
@@ -1186,67 +1181,6 @@ function updateTimeDisplay() {
     }
 }
 
-// function startTimer() {
-//     clearInterval(timerInterval);
-//     elapsedSeconds = 0;
-//     updateTimeDisplay();
-
-//     timerInterval = setInterval(() => {
-//         elapsedSeconds++;
-//         updateTimeDisplay();
-
-//         // Stop timer when all tasks are complete
-//         if (taskCompletion.every(Boolean)) {
-//             clearInterval(timerInterval);
-//         }
-//     }, 1000);
-// }
-
-// function startTimer() {
-//     clearInterval(timerInterval);
-//     elapsedSeconds = 0;
-//     updateTimeDisplay();
-
-//     // Remove dimming if previously applied
-//     document.getElementById("elapsedTime")?.classList.remove("timer-disabled");
-
-//     timerInterval = setInterval(() => {
-//         elapsedSeconds++;
-//         updateTimeDisplay();
-
-//         if (taskCompletion.every(Boolean)) {
-//             clearInterval(timerInterval);
-//             // Dim the timer when done
-//             document.getElementById("elapsedTime")?.classList.add("timer-disabled");
-//         }
-//     }, 1000);
-// }
-// function startTimer() {
-//     clearInterval(timerInterval);
-//     timerInterval = null;
-//     elapsedSeconds = 0;
-//     updateTimeDisplay();
-// }
-// function startTimer() {
-//     clearInterval(timerInterval);
-//     timerInterval = null;
-//     elapsedSeconds = 0;
-//     updateTimeDisplay();
-
-//     // Remove dimming in case it's already applied
-//     document.getElementById("elapsedTime")?.classList.remove("timer-disabled");
-// }
-// function startTimer() {
-//     clearInterval(timerInterval);
-//     timerInterval = null;
-
-//     // 🛑 Don't reset if already completed
-//     if (taskCompletion.every(Boolean)) return;
-
-//     elapsedSeconds = 0;
-//     updateTimeDisplay();
-//     document.getElementById("elapsedTime")?.classList.remove("timer-disabled");
-// }
 function startTimer() {
     clearInterval(timerInterval);
     timerInterval = null;
@@ -1259,36 +1193,6 @@ function startTimer() {
     document.getElementById("elapsedTime")?.classList.remove("timer-disabled");
 }
 
-// function startCountingTimer() {
-//     if (timerInterval) return; // Prevent double intervals
-
-//     timerInterval = setInterval(() => {
-//         elapsedSeconds++;
-//         updateTimeDisplay();
-
-//         if (taskCompletion.every(Boolean)) {
-//             clearInterval(timerInterval);
-//             timerInterval = null;
-//         }
-//     }, 1000);
-// }
-
-// function startCountingTimer() {
-//     if (timerInterval) return; // Prevent double intervals
-
-//     timerInterval = setInterval(() => {
-//         elapsedSeconds++;
-//         updateTimeDisplay();
-
-//         if (taskCompletion.every(Boolean)) {
-//             clearInterval(timerInterval);
-//             timerInterval = null;
-
-//             // Dim the timer when all tasks are completed
-//             document.getElementById("elapsedTime")?.classList.add("timer-disabled");
-//         }
-//     }, 1000);
-// }
 function startCountingTimer() {
     if (timerInterval || isTimerFrozen) return; // Prevent start if already done or frozen
 
@@ -1331,12 +1235,7 @@ window.applyDifficulty = function () {
     }
 };
 
-// Start timer on first page load
-// document.addEventListener('DOMContentLoaded', () => {
-//     startTimer();
-// });
-
-// Disable search form functionality (prevents reload)
+// ========== Disable search form functionality (prevents reload) ==========
 document.querySelector('form[role="search"]')?.addEventListener('submit', function (e) {
     e.preventDefault(); // Stop form from submitting
 });
