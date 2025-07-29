@@ -1203,7 +1203,7 @@ function startCountingTimer() {
         if (taskCompletion.every(Boolean)) {
             clearInterval(timerInterval);
             timerInterval = null;
-            isTimerFrozen = true; // ✅ Freeze it
+            isTimerFrozen = true; // Freeze timer
             document.getElementById("elapsedTime")?.classList.add("timer-disabled");
         }
     }, 1000);
