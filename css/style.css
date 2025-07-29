@@ -357,13 +357,10 @@ body {
 
 #downloadCertBtn:hover {
     background-color: #198754;
-    /* Bootstrap green */
     color: #fff;
 }
 
-/* ========================================
-   NAVBAR Standardisation Styles
-======================================== */
+/* === NAVBAR Standardized Styles === */
 .navbar {
     /* Simple shadow for navbar */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -378,19 +375,13 @@ body.lab-page .settings-dropdown {
     /* Settings only available for Lab/Quiz pages */
 }
 
-/* Fix placeholder visibility inside dark search bar */
 .form-control::placeholder {
     color: #cccccc !important;
     /* Light grey placeholder */
     opacity: 1;
-    /* Ensure it's visible in all browsers */
 }
 
-/* .navbar {
-    border-bottom: 4px solid #00ff00 !important;
-} */
-
-/* === Subtle, smooth highlight for active nav on lab pages === */
+/* Subtle, smooth highlight for active nav on lab pages */
 body.lab-page .navbar-nav .nav-link.lab-highlight {
     color: #f0f0f0 !important;
     /* Light grey */
@@ -400,10 +391,7 @@ body.lab-page .navbar-nav .nav-link.lab-highlight {
     transform: translateY(-1px);
 }
 
-
-/* ========================================
-   SETTINGS RELATED STYLES
-======================================== */
+/* === SETTINGS RELATED STYLES === */
 .dark-mode .settings-modal .modal-content,
 .dark-mode .settings-modal .modal-header,
 .dark-mode .settings-modal .modal-body,
@@ -448,5 +436,4 @@ body.lab-page .navbar-nav .nav-link.lab-highlight {
 .timer-disabled {
     opacity: 0.5;
     color: #6c757d !important;
-    /* Bootstrap "text-muted" gray */
 }
