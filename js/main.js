@@ -1185,7 +1185,7 @@ function startTimer() {
     clearInterval(timerInterval);
     timerInterval = null;
 
-    // 🛑 Don't restart if timer is frozen due to task completion
+    //  Don't restart if timer is frozen due to task completion
     if (isTimerFrozen) return;
 
     elapsedSeconds = 0;
@@ -1212,22 +1212,21 @@ function startCountingTimer() {
 
 // ========== TIMER RESET INTEGRATIONS ==========
 
-// Store reference to original confirmReset
+
 const originalConfirmReset = window.confirmReset;
 window.confirmReset = function () {
-    originalConfirmReset(); // keep your original logic
+    originalConfirmReset();
     startTimer(); // restart timer only when progress is reset
 };
 
-// Override applyDifficulty, check for actual difficulty change before timer reset
 const originalApplyDifficulty = window.applyDifficulty;
 window.applyDifficulty = function () {
     const selectedDiff = document.getElementById("difficultySelect").value;
 
-    // Skip timer reset if same difficulty — original logic already returns early
+    // Skip timer reset if same difficulty
     const prevDiff = currentDifficulty;
 
-    originalApplyDifficulty(); // run your existing logic
+    originalApplyDifficulty(); // run existing logic
 
     // Only restart timer if difficulty was truly changed
     if (selectedDiff !== prevDiff) {
