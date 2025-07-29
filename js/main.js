@@ -628,9 +628,9 @@ function updateBadge(percent) {
         badgeEl.innerHTML = badgeHTML;
 
         const messages = {
-            bronze: `🎉 Congrats! You unlocked the ‘🥉 ${prefix} Rookie’ badge!`,
-            silver: `🎉 Congrats! You unlocked the ‘🥈 ${prefix} Specialist’ badge!`,
-            gold: `🎉 Congrats! You unlocked the ‘🥇 ${prefix} Expert’ badge! You've also completed the entire ${prefix} module.`
+            bronze: `🎉 Congrats! You unlocked the ‘🥉 ${prefix} Rookie' badge!`,
+            silver: `🎉 Congrats! You unlocked the ‘🥈 ${prefix} Specialist' badge!`,
+            gold: `🎉 Congrats! You unlocked the ‘🥇 ${prefix} Expert' badge! You've also completed the entire ${prefix} module.`
         };
 
         if (newBadge && messages[newBadge]) {
