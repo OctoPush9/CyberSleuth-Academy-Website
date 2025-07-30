@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/images/cybersleuth-icon.png" type="image/png">
+    <title>CyberSleuth Academy Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Bootstrap & Font Awesome -->
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/hidden.css">
+</head>
+<body class="lab-page" oncontextmenu="return false;">
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <!-- Alert container for JS -->
+        <div id="alertArea" class="container position-fixed top-0 start-50 translate-middle-x mt-3"
+            style="z-index: 1055; max-width: 600px;"></div>
+
+        <div class="container">
+            <!-- Logo and Brand -->
+            <a class="navbar-brand d-flex align-items-center me-4" href="index.html" target="_blank">
+                <img src="assets/images/cybersleuth-icon.png" alt="Logo" style="height: 22px;" class="me-2">
+                CyberSleuth Academy
+            </a>
+
+            <!-- Collapse toggle for mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Content -->
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <!-- Left Links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a href="home.html" class="nav-link active">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="learn.html" class="nav-link">Learn</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="leaderboard.html" class="nav-link">Compete</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="quiz.html" class="nav-link">Content</a>
+                    </li>
+                </ul>
+
+                <!-- Right Tools -->
+                <ul class="navbar-nav ms-auto align-items-center gap-3">
+                    <!-- Search -->
+                    <li class="nav-item">
+                        <form class="d-flex align-items-center" role="search">
+                            <input type="text"
+                                class="form-control form-control-sm bg-dark text-white border border-secondary me-2"
+                                placeholder="Search" aria-label="Search">
+                            <button type="submit" class="btn btn-outline-success btn-sm">Search</button>
+                        </form>
+                    </li>
+
+
+                    <!-- Settings Dropdown (only shows if body.lab-page is present) -->
+                    <li class="nav-item dropdown settings-dropdown d-none">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-cog me-1"></i> Settings
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                    data-bs-target="#difficultyModal">
+                                    <i class="fas fa-sliders-h me-2"></i>Difficulty Level</a></li>
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#resetModal">
+                                    <i class="fas fa-redo me-2"></i>Reset Progress</a></li>
+                            <li>
+                                <div class="dropdown-item d-flex align-items-center" onclick="event.stopPropagation();">
+                                    <span class="me-2"><i class="fas fa-moon"></i> Dark Mode</span>
+                                    <label class="theme-toggle ms-auto mb-0">
+                                        <input type="checkbox" id="darkModeToggle" />
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+  <h3>Insider Threat Simulation</h3>
+
+  <div class="video-container">
+    <video id="video" controls>
+      <source src="MP Insider Threat.mov" type="video/mp4" >
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+</style>
+
+  <!-- Choice Buttons -->
+  <div id="choices1" class="choices hidden">
+    <button onclick="chooseOption(1,'A')">Contact the Employee</button>
+    <button href="forensics_analysis.html">Investigate Further</button>
+    <button onclick="chooseOption(1,'C')">Ignore the Alert</button>
+  </div>
+
+  <!-- Contact Employee -->
+  <div id="choices2" class="choices hidden">
+    <button onclick="window.location.href='forensics_analysis.html'">Investigate Further</button>
+  </div>
+
+  <!-- Ignore the alert -->
+  <div id="choices3" class="choices hidden">
+    <button onclick="window.location.href='forensics_analysis.html'">Proceed to Forensics</button>
+  </div>
+
+  <footer class="footer mt-auto">
+      <div>
+        <p>© 2025 CyberSleuth Academy. Developed by TP Cybersecurity & Digital Forensics Students.</p>
+        <p class="mb-0">All content is for educational purposes only.</p>
+      </div>
+  </footer>
+
+  <script src="js/insider_threat.js">
+    video.addEventListener('timeupdate', () => {
+    if (video.currentTime < lastTime) {
+      console.log('User rewound the video. Resetting activity...');
+      resetActivity();
+    }
+    lastTime = video.currentTime;
+    });
+
+    function resetActivity() {
+      // Hide all choice divs
+      document.getElementById('choices1').classList.add('hidden');
+      document.getElementById('choices2').classList.add('hidden');
+      document.getElementById('choices3').classList.add('hidden');
+
+      // Optional: Reset any state variables or visual cues if needed
+      // Example: reset background, messages, etc.
+    }
+
+  </script>
+
+</body>
+</html>
