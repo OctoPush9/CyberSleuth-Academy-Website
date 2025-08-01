@@ -29,20 +29,6 @@ let shownChoices = {
 video.addEventListener('timeupdate', () => {
   const time = video.currentTime;
 
-  let interactionTriggered = false;
-
-  if (video.currentTime < lastTime) {
-    resetActivity();
-    interactionTriggered = false;
-  }
-
-  if (!interactionTriggered && video.currentTime > 10) {
-    document.getElementById('choices1').classList.remove('hidden');
-    interactionTriggered = true;
-  }
-
-  lastTime = video.currentTime;
-
   // Pause at first decision point (~10s)
   if (time >= 21 && time < 21.5 && !shownChoices.first) {
     video.pause();

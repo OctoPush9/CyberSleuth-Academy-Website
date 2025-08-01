@@ -4,7 +4,8 @@ const choices2 = document.getElementById('choices2');
 
 let shownChoices = {
   first: false,
-  second: false
+  second: false,
+  third: false
 };
 
 //document.addEventListener('keydown', (e) => {
@@ -27,25 +28,6 @@ let shownChoices = {
 video.addEventListener('timeupdate', () => {
   const time = video.currentTime;
 
-    let interactionTriggered = false;
-
-  if (video.currentTime < lastTime) {
-    resetActivity();
-    interactionTriggered = false;
-  }
-
-  if (!interactionTriggered && video.currentTime > 26) {
-    document.getElementById('choices1').classList.remove('hidden');
-    interactionTriggered = true;
-  }
-
-  if (!interactionTriggered && video.currentTime > 39) {
-    document.getElementById('choices2').classList.remove('hidden');
-    interactionTriggered = true;
-  }
-
-  lastTime = video.currentTime;
-
   // Pause at first decision point (~10s)
   if (time >= 27 && time < 28 && !shownChoices.first) {
     video.pause();
@@ -60,10 +42,10 @@ video.addEventListener('timeupdate', () => {
     shownChoices.second = true;
   }
 
-  if (time >= 53.5 && time < 54 && !shownChoices.second) {
+  if (time >= 53.5 && time < 54 && !shownChoices.third) {
     video.pause();
     choices3.classList.remove('hidden');
-    shownChoices.second = true;
+    shownChoices.third = true;
   }
 });
 
