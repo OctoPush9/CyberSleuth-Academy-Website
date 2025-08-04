@@ -1,0 +1,356 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Helps with dynamic JS to detect which lab name for every lab html files -->
+    <meta name="lab-title" content="Phishing Forensics Lab">
+
+    <!-- Website Tab Icon and Page Title -->
+    <link rel="icon" href="assets/images/cybersleuth-icon.png" type="image/png">
+    <title>Phishing Forensics Lab</title>
+
+    <!-- Bootstrap & Font Awesome -->
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="lab-page">
+    <!-- ========================================
+       NAVBAR
+  ========================================= -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <!-- Alert container for JS -->
+        <div id="alertArea" class="container position-fixed top-0 start-50 translate-middle-x mt-3"
+            style="z-index: 1055; max-width: 600px;"></div>
+
+        <div class="container">
+            <!-- Logo and Brand -->
+            <a class="navbar-brand d-flex align-items-center me-4" href="index.html" target="_blank">
+                <img src="assets/images/cybersleuth-icon.png" alt="Logo" style="height: 22px;" class="me-2">
+                CyberSleuth Academy
+            </a>
+
+            <!-- Collapse toggle for mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Content -->
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <!-- Left Links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a href="home.html" class="nav-link">Simulation Rooms</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="learn.html" class="nav-link">Learn</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="leaderboard.html" class="nav-link">Compete</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="quiz.html" class="nav-link">Content</a>
+                    </li>
+                </ul>
+
+                <!-- Right Tools -->
+                <ul class="navbar-nav ms-auto align-items-center gap-3">
+                    <!-- Search -->
+                    <li class="nav-item">
+                        <form class="d-flex align-items-center" role="search">
+                            <input type="text"
+                                class="form-control form-control-sm bg-dark text-white border border-secondary me-2"
+                                placeholder="Search" aria-label="Search">
+                            <button type="submit" class="btn btn-outline-success btn-sm">Search</button>
+                        </form>
+                    </li>
+
+
+                    <!-- Settings Dropdown (only shows if body.lab-page is present) -->
+                    <li class="nav-item dropdown settings-dropdown d-none">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-cog me-1"></i> Settings
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                    data-bs-target="#difficultyModal">
+                                    <i class="fas fa-sliders-h me-2"></i>Difficulty Level</a></li>
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#resetModal">
+                                    <i class="fas fa-redo me-2"></i>Reset Progress</a></li>
+                            <li>
+                                <div class="dropdown-item d-flex align-items-center" onclick="event.stopPropagation();">
+                                    <span class="me-2"><i class="fas fa-moon"></i> Dark Mode</span>
+                                    <label class="theme-toggle ms-auto mb-0">
+                                        <input type="checkbox" id="darkModeToggle" />
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========================================
+        MAIN CONTENT
+  ========================================= -->
+    <main class="container py-4">
+        <!-- ========== PAGE HEADER ========== -->
+        <div class="row mb-4 align-items-center">
+            <div class="col-md-8">
+                <h1 class="mb-3"><i class="fas fa-envelope-open-text me-2"></i>Phishing Forensics Lab</h1>
+                <p class="lead">Analyze real-world phishing attacks through 8 interactive forensic tasks. Earn points,
+                    badges,
+                    and enhance your cybersecurity skills.</p>
+                <div class="d-flex align-items-center mb-3">
+                    <div class="badge bg-primary me-2"><i class="fas fa-clock me-1"></i> 60 mins</div>
+                    <div id="difficultyBadge" class="badge bg-warning"><i class="fas fa-graduation-cap me-1"></i>
+                        Intermediate
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 text-end">
+                <div class="points-badge-bar px-4 py-2 d-inline-block border rounded-pill">
+                    <span id="pointsDisplay" class="fw-bold text-dark">0</span>
+                    <span class="text-dark">points</span> |
+                    <span id="badgesDisplay">No badges</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== PROGRESS & METRICS ========== -->
+        <section class="mb-4">
+            <div class="d-flex align-items-center gap-3 flex-wrap mb-3">
+                <div id="streakBox" class="d-inline-flex align-items-center px-3 py-1 rounded-pill shadow-sm">
+                    <i class="fas fa-fire me-2 text-warning fs-5"></i>
+                    <span class="fw-semibold">Answer Streak:</span>
+                    <span id="currentStreak" class="ms-2 fw-bold">0</span>
+                </div>
+
+                <div id="hintCounterDisplay" style="display: none;">
+                    <div class="d-inline-flex align-items-center px-3 py-1 rounded-pill shadow-sm hint-counter-box">
+                        <i class="fas fa-lightbulb me-2 text-warning fs-5"></i>
+                        <span class="hint-counter-text">Hints used:</span>
+                        <span class="hint-counter-text mx-1" id="usedHintCount">0</span>
+                        <span class="hint-counter-text">/</span>
+                        <span class="hint-counter-text ms-1" id="maxHintCount">0</span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="fw-bold">Progress</span>
+                <div class="d-flex align-items-center gap-3">
+
+                    <span id="elapsedTime" class="fw-semibold small">
+                        <i class="fas fa-clock me-1 text-success"></i>
+                        <span id="timeDisplay">00:00:00</span>
+                    </span>
+
+                    <span id="progressText" class="fw-semibold small">
+                        <i class="fas fa-chart-bar me-1 text-primary"></i>
+                        0% Complete
+                    </span>
+
+                </div>
+            </div>
+
+            <div class="progress position-relative">
+                <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                    style="width: 0%"></div>
+                <div class="progress-label">Step 0 of 8</div>
+            </div>
+        </section>
+
+        <!-- ========== TASKS & LAB GUIDE TOOLKIT LAYOUT ========== -->
+        <div class="row">
+            <!-- Tasks Section -->
+            <div class="col-lg-8">
+                <div class="accordion" id="tasksAccordion"></div>
+            </div>
+
+            <div class="col-lg-4">
+                <aside class="tool-card position-sticky" style="top: calc(4rem + 1rem); text-align: justify;">
+                    <h4 class="mb-3">
+                        <i class="fas fa-book-open me-2"></i>Lab Guide
+                    </h4>
+
+                    <div class="mb-3 small">
+                        <p><strong><i class="fas fa-bullseye text-primary me-1"></i>Goal:</strong> Complete all tasks to
+                            earn up to 100 points and unlock badges.</p>
+
+                        <p><strong><i class="fas fa-check-circle text-success me-1"></i>Tasks:</strong> Each task has
+                            practice content and a <em>Knowledge Check</em>. Points are awarded only if all quiz
+                            questions are answered correctly, with no question using all attempts. Interactive parts do
+                            not add points.</p>
+
+                        <p><strong><i class="fas fa-coins text-warning me-1"></i>Points:</strong> Each perfect task
+                            gives equal points. Total score is 100 divided by the number of tasks.</p>
+
+
+                        <p><strong><i class="fas fa-lock text-danger me-1"></i>Attempts:</strong> Intermediate has up to
+                            3
+                            tries per question, based on number of options. Hard Only has 1 try. If you use all tries,
+                            the
+                            task is marked Incomplete.</p>
+
+                        <p><strong><i class="fas fa-lightbulb text-warning me-1"></i>Hints:</strong> Easy: Unlimited.
+                            Intermediate: 1 hint for every 3 questions total. Hard: Hints disabled. Used-up hints
+                            disable all buttons with a message.</p>
+
+
+                        <p><strong><i class="fas fa-fire text-danger me-1"></i>Streak:</strong> Consecutive correct
+                            answers increase your streak. Special messages appear at 3, 5, 7, and 10.</p>
+
+                        <p><strong><i class="fas fa-medal text-warning me-1"></i>Badges:</strong> Bronze at 50 points,
+                            Silver at 75, Gold at 100.</p>
+
+                        <p><strong><i class="fas fa-lightbulb text-warning me-1"></i>Hints:</strong> Easy: Unlimited.
+                            Intermediate: Limited. Hard: Disabled.</p>
+
+                        <p><strong><i class="fas fa-cog text-primary me-1"></i>Settings:</strong> Use the top-right menu
+                            to change difficulty, reset progress, or toggle dark mode. When changed in one lab, your
+                            selected difficulty and theme will also apply to other lab pages and stay saved on this
+                            browser even after closing or reloading the page.</p>
+
+                        <p><strong><i class="fas fa-tasks text-success me-1"></i>Task Status:</strong> Tasks start as
+                            Pending. Opening a task marks it In Progress. Getting all answers right marks it Completed.
+                            If any question runs out of attempts, it's marked Incomplete. Status resets to Pending only
+                            when you
+                            reset progress or change difficulty.</p>
+
+
+                        <p><strong><i class="fas fa-check-double text-secondary me-1"></i>Question Types:</strong>
+                        <ul class="mb-0">
+                            <li>☑️ Multiple-select: Square boxes</li>
+                            <li>🔘 Single-choice: Round buttons</li>
+                            <li>✔️ True/False: Two round options</li>
+                        </ul>
+                        </p>
+
+                        <p class="mt-3"><strong><i class="fas fa-certificate text-success me-1"></i>Certificate Of
+                                Completion:</strong> The "Download Certificate" button appears inside the last task card
+                            (Conclusion). It stays disabled until all tasks are fully completed. When unlocked, you’ll
+                            be asked to enter your full name (letters and spaces only). Once confirmed, a PDF
+                            certificate with your name will be downloaded.</p>
+
+                        <p><strong><i class="fas fa-stopwatch text-primary me-1"></i>Stopwatch:</strong> The stopwatch
+                            starts only when you open a task for the first time. It resets to 00:00 if you reload, leave
+                            the page, change difficulty, or reset progress. After reset, it stays at 00:00 until you
+                            open another task.</p>
+
+                        <p class="mb-0"><strong><i class="fas fa-lightbulb text-warning me-1"></i>Tip:</strong> Stay
+                            focused and accurate to score full points in one go.</p>
+                    </div>
+                </aside>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ========================================
+        MODALS
+  ========================================= -->
+
+    <!-- Difficulty Modal -->
+    <div class="modal fade settings-modal" id="difficultyModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Choose Difficulty</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="difficultySelect" class="form-label fw-semibold">Select Difficulty</label>
+                        <select id="difficultySelect" class="form-select" onchange="updateDifficultyDescription()">
+                            <option value="Easy">Easy</option>
+                            <option value="Intermediate" selected>Intermediate</option>
+                            <option value="Hard">Hard</option>
+                        </select>
+                        <div id="difficultyDescription" class="form-text mt-2 text-muted small">
+                            Intermediate: Limited attempts per question, and limited hint usage.
+                        </div>
+                    </div>
+                    <div class="alert alert-warning mb-0 small">
+                        <i class="fas fa-info-circle me-1"></i>
+                        Changing difficulty will reset your current progress in this module.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" onclick="applyDifficulty()">Apply</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reset Modal -->
+    <div class="modal fade settings-modal" id="resetModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Reset Progress</h5>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to reset all progress?
+                    <p class="mt-2 mb-0">This cannot be undone.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn btn-danger" onclick="confirmReset()">Reset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================
+        FOOTER
+  ========================================= -->
+    <footer class="footer mt-auto" style="background-color: #f1f1f1;">
+        <div class="container text-center px-3 small text-muted d-flex flex-column justify-content-start"
+            style="height: 120px; padding-top: 25px;">
+            <p class="mb-2 fw-semibold" style="font-size: 1rem;">
+                © 2025 CyberSleuth Academy. Developed by TP Cybersecurity & Digital Forensics Students.
+            </p>
+            <p class="mb-0">All content is for educational purposes only.</p>
+        </div>
+    </footer>
+
+    <!-- ========================================
+        SCRIPTS
+  ========================================= -->
+
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/libs/confetti.browser.js"></script>
+    <script src="js/phishing-forensics-tasks.js"></script>
+    <script src="js/libs/jspdf.umd.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
+
+<!--  Ready to reuse!
+To make this into another lab (like “Insider Threats Lab”):
+
+Just update:
+
+The <title> tag
+
+The content of the following tag <meta name="lab-title" content="Insider Threats Lab">
+
+The <h1> icon and title
+
+The line js/phishing-forensics-tasks.js to point to insider-threats-tasks.js
+
+Any header text or H5P interactions as needed -->
