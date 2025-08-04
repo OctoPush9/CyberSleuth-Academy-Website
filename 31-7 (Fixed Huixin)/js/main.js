@@ -8,6 +8,8 @@ let hasCelebrated = false;
 let usedHints = 0;
 let maxHintsAllowed = 0;
 let answerStreak = 0;
+let hasOpenedTask = false;
+
 
 // Game progress state
 let currentDifficulty = localStorage.getItem("difficulty") || "Intermediate";
@@ -449,6 +451,12 @@ function disableAllRemainingHints() {
 function toggleTask(i) {
     const currentBody = document.getElementById(`taskBody${i}`);
     const currentStatus = document.getElementById(`taskStatus${i}`);
+    hasOpenedTask = true;
+    if (!timerInterval) startTimer();
+    startCountingTimer(); // Start timer only when any task card is opened
+
+
+
 
     // Close all other task bodies
     document.querySelectorAll("[id^=taskBody]").forEach((el, idx) => {
@@ -547,7 +555,8 @@ function updateProgress() {
 
     // Update progress label + points UI
     document.querySelector(".progress-label").textContent = `Step ${currentStep} of ${totalSteps}`;
-    document.getElementById("progressText").textContent = `${Math.round(progressPercent)}% Complete`;
+    // document.getElementById("progressText").textContent = `${Math.round(progressPercent)}% Complete`;
+    document.getElementById("progressText").innerHTML = `<i class="fas fa-chart-line me-1 text-primary"></i> <span class="fw-semibold">${Math.round(progressPercent)}% Complete</span>`;
     document.getElementById("pointsDisplay").textContent = score;
 
     // Check for new badge unlocks
@@ -606,7 +615,11 @@ function updateBadge(percent) {
     } else if (percent >= 50) {
         newBadge = "bronze";
         badgeHTML = `<span class="badge rounded-pill bg-secondary text-white small">🥉 ${prefix} Rookie</span>`;
+    } else {
+        newBadge = "none";
+        badgeHTML = `<span class="class="fw-semibold small text-dark"">No badges</span>`;
     }
+
 
 
     // Only update if changed
@@ -615,9 +628,9 @@ function updateBadge(percent) {
         badgeEl.innerHTML = badgeHTML;
 
         const messages = {
-            bronze: `🎉 Congrats! You unlocked the ‘🥉 ${prefix} Rookie’ badge!`,
-            silver: `🎉 Congrats! You unlocked the ‘🥈 ${prefix} Specialist’ badge!`,
-            gold: `🎉 Congrats! You unlocked the ‘🥇 ${prefix} Expert’ badge! You've also completed the entire ${prefix} module.`
+            bronze: `🎉 Congrats! You unlocked the ‘🥉 ${prefix} Rookie' badge!`,
+            silver: `🎉 Congrats! You unlocked the ‘🥈 ${prefix} Specialist' badge!`,
+            gold: `🎉 Congrats! You unlocked the ‘🥇 ${prefix} Expert' badge! You've also completed the entire ${prefix} module.`
         };
 
         if (newBadge && messages[newBadge]) {
@@ -649,6 +662,10 @@ function updateBadge(percent) {
 // ========================================
 function applyDifficulty() {
     hasCelebrated = false;
+    hasOpenedTask = false;
+
+    isTimerFrozen = false;
+    startTimer();
 
     const selectedDiff = document.getElementById("difficultySelect").value;
 
@@ -772,6 +789,11 @@ function confirmReset() {
     currentStep = 0;
     usedHints = 0;
     answerStreak = 0;
+    hasOpenedTask = false;
+
+    isTimerFrozen = false;
+    startTimer();
+
 
     // Reset task and question tracking
     for (let i = 0; i < tasks.length; i++) {
@@ -989,10 +1011,11 @@ function reloadAllH5P() {
 }
 
 // Alert users not to close or reload browser - progress will not be saved.
-
-window.addEventListener("beforeunload", function (e) {
-    e.preventDefault();
-    e.returnValue = "";
+window.addEventListener('beforeunload', function (e) {
+    if (hasOpenedTask) {
+        e.preventDefault();
+        e.returnValue = '';
+    }
 });
 
 
@@ -1124,3 +1147,94 @@ function generateCertificate(userName) {
     const cleanLabName = labTitle.toLowerCase().replace(/\s+/g, "_").replace(/[^\w]/g, "");
     doc.save(`${userName.replace(/\s+/g, "_")}_${cleanLabName}_certificate.pdf`);
 }
+
+// Gently highlight "Content" tab when on lab pages
+document.addEventListener("DOMContentLoaded", () => {
+    if (document.body.classList.contains("lab-page")) {
+        const contentTab = document.querySelector('.nav-link[href="quiz.html"]');
+        if (contentTab) {
+            contentTab.classList.add("lab-highlight");
+        }
+    }
+});
+
+
+
+// ========== TIMER SETUP ==========
+
+let timerInterval;
+let elapsedSeconds = 0;
+let isTimerFrozen = false;
+
+
+function formatTime(seconds) {
+    const hrs = Math.floor(seconds / 3600).toString().padStart(2, '0');
+    const mins = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
+    const secs = (seconds % 60).toString().padStart(2, '0');
+    return `${hrs}:${mins}:${secs}`;
+}
+
+function updateTimeDisplay() {
+    const timeDisplay = document.getElementById('timeDisplay');
+    if (timeDisplay) {
+        timeDisplay.textContent = formatTime(elapsedSeconds);
+    }
+}
+
+function startTimer() {
+    clearInterval(timerInterval);
+    timerInterval = null;
+
+    //  Don't restart if timer is frozen due to task completion
+    if (isTimerFrozen) return;
+
+    elapsedSeconds = 0;
+    updateTimeDisplay();
+    document.getElementById("elapsedTime")?.classList.remove("timer-disabled");
+}
+
+function startCountingTimer() {
+    if (timerInterval || isTimerFrozen) return; // Prevent start if already done or frozen
+
+    timerInterval = setInterval(() => {
+        elapsedSeconds++;
+        updateTimeDisplay();
+
+        if (taskCompletion.every(Boolean)) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            isTimerFrozen = true; // Freeze timer
+            document.getElementById("elapsedTime")?.classList.add("timer-disabled");
+        }
+    }, 1000);
+}
+
+
+// ========== TIMER RESET INTEGRATIONS ==========
+
+
+const originalConfirmReset = window.confirmReset;
+window.confirmReset = function () {
+    originalConfirmReset();
+    startTimer(); // restart timer only when progress is reset
+};
+
+const originalApplyDifficulty = window.applyDifficulty;
+window.applyDifficulty = function () {
+    const selectedDiff = document.getElementById("difficultySelect").value;
+
+    // Skip timer reset if same difficulty
+    const prevDiff = currentDifficulty;
+
+    originalApplyDifficulty(); // run existing logic
+
+    // Only restart timer if difficulty was truly changed
+    if (selectedDiff !== prevDiff) {
+        startTimer();
+    }
+};
+
+// ========== Disable search form functionality (prevents reload) ==========
+document.querySelector('form[role="search"]')?.addEventListener('submit', function (e) {
+    e.preventDefault(); // Stop form from submitting
+});
