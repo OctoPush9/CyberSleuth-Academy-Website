@@ -58,9 +58,9 @@
   <img src="assets/images/phishing/wireshark.png" alt="Cybersecurity Screenshot" />
 
   <div class="hotspot-button" style="top: 10%; left: 58%; width: 8%; height: 5%;" onclick="openToolInfo('Notes')"></div>
-  <div class="hotspot-button" style="top: 30%; left: 58%; width: 8%; height: 5%;" onclick="openToolInfo('Firewall')"></div>
-  <div class="hotspot-button" style="top: 60%; left: 30%; width: 20%; height: 12%;" onclick="openToolInfo('Antivirus')"></div>
-  <div class="hotspot-button" style="top: 85%; left: 70%; width: 20%; height: 10%;" onclick="openToolInfo('Phishing Simulation')"></div>
+  <div class="hotspot-button" style="top: 24%; left: 1%; width: 80%; height: 4%;" onclick="openToolInfo('Filter')"></div>
+  <div class="hotspot-button" style="top: 28%; left: 0%; width: 55%; height: 4%;" onclick="openToolInfo('Columns')"></div>
+  <div class="hotspot-button" style="top: 27%; left: 96%; width: 3%; height: 70%;" onclick="openToolInfo('Packet row colours')"></div>
 
   <!-- Info Panel & Overlay -->
   <div class="overlay" id="overlay" onclick="closePanel()"></div>
@@ -97,7 +97,6 @@
       <a href="https://www.wireshark.org/download.html" target="_blank" rel="noopener noreferrer">Download Wireshark (official website)</a> <br>
       <a href="assets/files/wireshark_exercise.pcap">Wireshark Exercise Sample (.pcap)</a> <br>
       <a href="https://www.stationx.net/wireshark-cheat-sheet/" target="_blank" rel="noopener noreferrer">Wireshark Cheatsheet</a>
-     
     </div> 
   </div>
 
@@ -120,10 +119,10 @@
   <!-- Core Script -->
   <script>
     const toolData = {
-      "Notes": "Try Notes",
-      "Firewall": "A firewall is a network security device that monitors and filters incoming and outgoing network traffic based on security rules.",
-      "Antivirus": "Antivirus software is designed to detect, prevent, and remove malware including viruses, worms, and trojan horses.",
-      "Phishing Simulation": "Phishing simulations help train users by mimicking real phishing attacks to improve awareness and response to threats."
+      "Notes": "*DISCLAIMER: always get permission before scanning any network",
+      "Filter": "Make use of custom filtering to help narrow down results. For example, if you wish to look out for traffic to a certain destination, you can type 'ip.dst == [destination IP address]' online sources can be great to refresh your memory on filtering syntax!",
+      "Columns": "Columns can help to simplify what results we wish to look at. It could be grouping a certain protocol together, grouping the same source IP address together, and more! We can also add or remove columns by going to Edit>Preferences>Appearance>Columns.",
+      "Packet row colours": "The default colours of packet rows help us group common types of traffic together. Each colour has its own typical meaning. Some colours are: Red - TCP reset, Black - TCP packets with problems, Light blue - TCP Traffic, Light Purple - UDP Traffic, Light Green - HTTP/other high level protocols,  Light Yellow - Windows specific traffic including SMB and NetBIOS."
     };
 
     function openToolInfo(toolName) {
