@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/images/cybersleuth-icon.png" type="image/png">
+    <title>CyberSleuth Academy Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/quiz.css">
+</head>
+<body class="lab-page">
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <!-- Alert container for JS -->
+        <div id="alertArea" class="container position-fixed top-0 start-50 translate-middle-x mt-3"
+            style="z-index: 1055; max-width: 600px;"></div>
+
+        <div class="container">
+            <!-- Logo and Brand -->
+            <a class="navbar-brand d-flex align-items-center me-4" href="index.html" target="_blank">
+                <img src="assets/images/cybersleuth-icon.png" alt="Logo" style="height: 22px;" class="me-2">
+                CyberSleuth Academy
+            </a>
+
+            <!-- Collapse toggle for mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Content -->
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <!-- Left Links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a href="home.html" class="nav-link">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="learn.html" class="nav-link">Training Zone</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="leaderboard.php" class="nav-link">Leaderboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="quiz.html" class="nav-link active">Knowledge Battle</a>
+                    </li>
+                </ul>
+
+                <!-- Right Tools -->
+                <ul class="navbar-nav ms-auto align-items-center gap-3">
+                    <!-- Search -->
+                    <li class="nav-item">
+                        <form class="d-flex align-items-center" role="search">
+                            <input type="text"
+                                class="form-control form-control-sm bg-dark text-white border border-secondary me-2"
+                                placeholder="Search" aria-label="Search">
+                            <button type="submit" class="btn btn-outline-success btn-sm">Search</button>
+                        </form>
+                    </li>
+
+                    <!-- Settings Dropdown -->
+                    <li class="nav-item dropdown settings-dropdown d-none">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-cog me-1"></i> Settings
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                    data-bs-target="#difficultyModal">
+                                    <i class="fas fa-sliders-h me-2"></i>Difficulty Level</a></li>
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#resetModal">
+                                    <i class="fas fa-redo me-2"></i>Reset Progress</a></li>
+                            <li>
+                                <div class="dropdown-item d-flex align-items-center" onclick="event.stopPropagation();">
+                                    <span class="me-2"><i class="fas fa-moon"></i> Dark Mode</span>
+                                    <label class="theme-toggle ms-auto mb-0">
+                                        <input type="checkbox" id="darkModeToggle" />
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-3">Test Your Knowledge</h1>
+                <p class="text-center mb-4">Reinforce what you've learned with these interactive quizzes.</p>
+
+                <div class="row g-4">
+                    <!-- Phishing Card -->
+                    <div class="col-md-6">
+                        <a href="phishing-forensics.html" class="card-link">
+                            <div class="card h-100 quiz-card">
+                                <div class="card-body">
+                                    <div class="card-icon-container">
+                                        <img src="assets/images/phishing/phishing_icon.png" alt="Phishing Icon" class="card-icon">
+                                    </div>
+                                    <h2 class="card-title">Phishing Forensics</h2>
+                                    <p class="card-description">
+                                        Test your understanding of phishing attacks, email analysis, and digital investigation techniques.
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Insider Threats Card -->
+                    <div class="col-md-6">
+                        <a href="insider-threats.html" class="card-link">
+                            <div class="card h-100 quiz-card">
+                                <div class="card-body">
+                                    <div class="card-icon-container">
+                                        <img src="assets/images/insider/Insider threat_icon.png" alt="Insider Threat Icon" class="card-icon">
+                                    </div>
+                                    <h2 class="card-title">Insider Threats</h2>
+                                    <p class="card-description">
+                                        Challenge yourself on identifying and responding to internal security threats.
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer mt-auto bg-dark text-white py-4">
+        <div class="container">
+            <div class="text-center">
+                <p>© 2025 CyberSleuth Academy. Developed by TP Cybersecurity & Digital Forensics Students.</p>
+                <p class="mb-0">All content is for educational purposes only.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
