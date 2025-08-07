@@ -62,6 +62,7 @@
   <div class="hotspot-button" style="top: 11%; left: 96%; width: 3%; height: 63%;" onclick="openToolInfo('Packet row colours')"></div>
   <div class="hotspot-button" style="top: 74%; left: 0%; width: 50%; height: 26%;" onclick="openToolInfo('Packet Details Pane')"></div>
   <div class="hotspot-button" style="top: 74%; left: 50%; width: 50%; height: 26%;" onclick="openToolInfo('Packet Bytes Pane')"></div>
+  <div class="hotspot-button" style="top: 37%; left: 1%; width: 80%; height: 3%;" onclick="openToolInfo('Suspicious packets')"></div>
 </div>
 
   <!-- Info Panel & Overlay -->
@@ -88,7 +89,7 @@
     <div class="instructions-content">
       <p>Welcome to the Wireshark simulation!</p>
       <ul>
-        <li>Hover over areas to find the 5 interactive hotspots.</li>
+        <li>Hover over areas to find the 6 interactive hotspots.</li>
         <li>Click on them to learn more about its function.</li>
         <li>Once done, feel free to explore more tools by using the buttons near the bottom.</li>
       </ul>
@@ -128,7 +129,8 @@
       "Columns": "Columns can help to simplify what results we wish to look at. It could be grouping a certain protocol together, grouping the same source IP address together, and more! We can also add or remove columns by going to Edit>Preferences>Appearance>Columns.",
       "Packet row colours": "The default colours of packet rows help us group common types of traffic together. Each colour has its own typical meaning. Some colours are: Red - TCP reset, Black - TCP packets with problems, Light blue - TCP Traffic, Light Purple - UDP Traffic, Light Green - HTTP/other high level protocols,  Light Yellow - Windows specific traffic including SMB and NetBIOS.",
       "Packet Details Pane" : "This pane shows information on the selected packet, click on the '>' to expand the individual content",
-      "Packet Bytes Pane": "Quick way to see what a payload says in human readable form when traffic is unencrypted, else it would appear in gibberish."
+      "Packet Bytes Pane": "Quick way to see what a payload says in human readable form when traffic is unencrypted, else it would appear in gibberish.",
+      "Suspicious packets": "We can select suspicious packets to further investigate, like following 'http stream' by right clicking on a packet that has suspicious activities listed in the 'Info' column of a packet containing http traffic."
     };
 
     function openToolInfo(toolName) {
