@@ -34,10 +34,10 @@
 
       <div class="collapse navbar-collapse" id="mainNavbar">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a href="home.html" class="nav-link active">Dashboard</a></li>
-          <li class="nav-item"><a href="learn.html" class="nav-link">Learn</a></li>
-          <li class="nav-item"><a href="leaderboard.html" class="nav-link">Compete</a></li>
-          <li class="nav-item"><a href="quiz.html" class="nav-link">Content</a></li>
+          <li class="nav-item"><a href="home.html" class="nav-link">Dashboard</a></li>
+          <li class="nav-item"><a href="learn.html" class="nav-link">Training Zone</a></li>
+          <li class="nav-item"><a href="leaderboard.html" class="nav-link">Leaderboard</a></li>
+          <li class="nav-item"><a href="quiz.html" class="nav-link">Knowledge Battle</a></li>
         </ul>
 
         <ul class="navbar-nav ms-auto align-items-center gap-3">
@@ -53,14 +53,16 @@
   </nav>
 
   <!-- Main Content -->
-  <h2 style="text-align:center;">Wireshark --- --- --- notes</h2>
+  <h2 style="text-align:center;">Wireshark</h2>
 
+  <div class="screenshot-container">
   <img src="assets/images/phishing/wireshark.png" alt="Cybersecurity Screenshot" />
-
-  <div class="hotspot-button" style="top: 10%; left: 58%; width: 8%; height: 5%;" onclick="openToolInfo('Notes')"></div>
-  <div class="hotspot-button" style="top: 24%; left: 1%; width: 80%; height: 4%;" onclick="openToolInfo('Filter')"></div>
-  <div class="hotspot-button" style="top: 28%; left: 0%; width: 55%; height: 4%;" onclick="openToolInfo('Columns')"></div>
-  <div class="hotspot-button" style="top: 27%; left: 96%; width: 3%; height: 70%;" onclick="openToolInfo('Packet row colours')"></div>
+  <div class="hotspot-button" style="top: 7%; left: 1%; width: 80%; height: 4%;" onclick="openToolInfo('Filter')"></div>
+  <div class="hotspot-button" style="top: 11%; left: 0%; width: 55%; height: 4%;" onclick="openToolInfo('Columns')"></div>
+  <div class="hotspot-button" style="top: 11%; left: 96%; width: 3%; height: 63%;" onclick="openToolInfo('Packet row colours')"></div>
+  <div class="hotspot-button" style="top: 74%; left: 0%; width: 50%; height: 26%;" onclick="openToolInfo('Packet Details Pane')"></div>
+  <div class="hotspot-button" style="top: 74%; left: 50%; width: 50%; height: 26%;" onclick="openToolInfo('Packet Bytes Pane')"></div>
+</div>
 
   <!-- Info Panel & Overlay -->
   <div class="overlay" id="overlay" onclick="closePanel()"></div>
@@ -86,13 +88,14 @@
     <div class="instructions-content">
       <p>Welcome to the Wireshark simulation!</p>
       <ul>
-        <li>Hover over areas to find interactive hotspots.</li>
-        <li>Click on them to learn more about cybersecurity tools.</li>
-        <li>Use the navigation buttons below to explore more modules.</li>
+        <li>Hover over areas to find the 5 interactive hotspots.</li>
+        <li>Click on them to learn more about its function.</li>
+        <li>Once done, feel free to explore more tools by using the buttons near the bottom</li>
       </ul>
 
       <hr>
-
+      <p>*DISCLAIMER: Always get permission before scanning any network</p>
+      <hr>
       <p><strong>Resources:</strong></p>
       <a href="https://www.wireshark.org/download.html" target="_blank" rel="noopener noreferrer">Download Wireshark (official website)</a> <br>
       <a href="assets/files/wireshark_exercise.pcap">Wireshark Exercise Sample (.pcap)</a> <br>
@@ -119,10 +122,12 @@
   <!-- Core Script -->
   <script>
     const toolData = {
-      "Notes": "*DISCLAIMER: always get permission before scanning any network",
+      
       "Filter": "Make use of custom filtering to help narrow down results. For example, if you wish to look out for traffic to a certain destination, you can type 'ip.dst == [destination IP address]' online sources can be great to refresh your memory on filtering syntax!",
       "Columns": "Columns can help to simplify what results we wish to look at. It could be grouping a certain protocol together, grouping the same source IP address together, and more! We can also add or remove columns by going to Edit>Preferences>Appearance>Columns.",
-      "Packet row colours": "The default colours of packet rows help us group common types of traffic together. Each colour has its own typical meaning. Some colours are: Red - TCP reset, Black - TCP packets with problems, Light blue - TCP Traffic, Light Purple - UDP Traffic, Light Green - HTTP/other high level protocols,  Light Yellow - Windows specific traffic including SMB and NetBIOS."
+      "Packet row colours": "The default colours of packet rows help us group common types of traffic together. Each colour has its own typical meaning. Some colours are: Red - TCP reset, Black - TCP packets with problems, Light blue - TCP Traffic, Light Purple - UDP Traffic, Light Green - HTTP/other high level protocols,  Light Yellow - Windows specific traffic including SMB and NetBIOS.",
+      "Packet Details Pane" : "This pane shows information on the selected packet, click on the '>' to expand the individual content",
+      "Packet Bytes Pane": "Quick way to see what a payload says in human readable form when traffic is unencrypted, else it would appear in gibberish."
     };
 
     function openToolInfo(toolName) {
