@@ -43,15 +43,22 @@
     </div>
   </nav>
 
-  <!-- Main Content -->
-  <h2 style="text-align:center;">Event Viewer --- --- --- notes</h2>
+   <!-- Main Content -->
+  <h2 style="text-align:center;">Event Viewer</h2>
 
+  <div class="screenshot-container">
   <img src="assets/images/phishing/event_viewer.png" alt="Cybersecurity Screenshot" />
-
-  <div class="hotspot-button" style="top: 10%; left: 60%; width: 7%; height: 5%;" onclick="openToolInfo('Notes')"></div>
-  <div class="hotspot-button" style="top: 150%; left: 50%; width: 15%; height: 10%;" onclick="openToolInfo('Firewall')"></div>
-  <div class="hotspot-button" style="top: 60%; left: 30%; width: 20%; height: 12%;" onclick="openToolInfo('Antivirus')"></div>
-  <div class="hotspot-button" style="top: 85%; left: 70%; width: 20%; height: 10%;" onclick="openToolInfo('Phishing Simulation')"></div>
+  <div class="hotspot-button" style="top: 33%; left: 4%; width: 10%; height: 4%;" onclick="openToolInfo('Application')"></div>
+  <div class="hotspot-button" style="top: 37%; left: 4%; width: 10%; height: 4%;" onclick="openToolInfo('Security')"></div>
+  <div class="hotspot-button" style="top: 44%; left: 4%; width: 10%; height: 4%;" onclick="openToolInfo('System')"></div>
+  <div class="hotspot-button" style="top: 24%; left: 21.5%; width: 6.5%; height: 5%;" onclick="openToolInfo('Keywords')"></div>
+  <div class="hotspot-button" style="top: 24%; left: 31%; width: 9%; height: 5%;" onclick="openToolInfo('Date and Time')"></div>
+  <div class="hotspot-button" style="top: 24%; left: 50%; width: 5%; height: 5%;" onclick="openToolInfo('Source')"></div>
+  <div class="hotspot-button" style="top: 24%; left: 63%; width: 5.5%; height: 5%;" onclick="openToolInfo('Event ID')"></div>
+  <div class="hotspot-button" style="top: 24%; left: 69%; width: 9%; height: 5%;" onclick="openToolInfo('Task Category')"></div>
+  <div class="hotspot-button" style="top: 68%; left: 22%; width: 11%; height: 5%;" onclick="openToolInfo('General/Details')"></div>
+  <div class="hotspot-button" style="top: 18%; left: 81%; width: 17%; height: 78%;" onclick="openToolInfo('Actions')"></div>
+</div>
 
   <!-- Info Panel & Overlay -->
   <div class="overlay" id="overlay" onclick="closePanel()"></div>
@@ -64,7 +71,7 @@
   <!-- Bottom Right Next Button -->
   <a href="task_manager.html" class="corner-button next-button">Explore Task Manager →</a>
   <!-- Bottom Left Back Button -->
-  <a href="mitigation_measures.html" class="corner-button back-button">← Go Back</a>
+  <a href="home.html" class="corner-button back-button">← Go Back</a>
 
   <!-- Right-Side Instruction Panel -->
   <div class="instructions-panel" id="instructionsPanel">
@@ -77,10 +84,13 @@
     <div class="instructions-content">
       <p>Welcome to the Event Viewer simulation!</p>
       <ul>
-        <li>Hover over areas to find interactive hotspots.</li>
+        <li>Hover over areas to find the 10 interactive hotspots.</li>
         <li>Click on them to learn more about cybersecurity tools.</li>
-        <li>Use the navigation buttons below to explore more modules.</li>
+        <li>Once done, feel free to explore more tools by using the buttons near the bottom.</li>
       </ul>
+      <hr>
+      <p><strong>Tip:</strong></p>
+      <p>Windows key + R, then type 'eventvwr' will open up event viewer for you!</p>
     </div>
   </div>
 
@@ -103,10 +113,16 @@
   <!-- Core Script -->
   <script>
     const toolData = {
-      "Notes": "Try Notes",
-      "Firewall": "A firewall is a network security device that monitors and filters incoming and outgoing network traffic based on security rules.",
-      "Antivirus": "Antivirus software is designed to detect, prevent, and remove malware including viruses, worms, and trojan horses.",
-      "Phishing Simulation": "Phishing simulations help train users by mimicking real phishing attacks to improve awareness and response to threats."
+      "Application": "Take note of crashes especially if coming from an antivirus and also do check for PowerShell activity (Event ID 400, 403, 600).",
+      "Security": "Logon events at unusual hours or accounts and failed logon events with a brute-force pattern(Event ID 4624, 4625) are red flags and should be looked into. Unauthorised account creation or special logons (Event IDs 4720, 4670, 4672) could be a sign of attempt of privilege escalation. Audit policy changes (Event ID 4719) are also something to look out for as attackers might wish to disable logging. Cleared logs (Event ID 1102) is a strong indicator of someone trying to hide their traces.",
+      "System": "Look out for unexpected shutdowns or restarts (Event IDs 1074, 6008), services terminated or suspicious services installed (Event ID 7034, 7045) to see if you have been compromised.",
+      "Keywords": "Remember that 'Audit Success' is not always good and 'Audit Failure' is not always bad! Some could be genuine mistakes so do look out for a pattern to see if they are suspicious or not. (Eg. A sudden successful logon event after multiple failures could indicate a successful password guess through brute-force method.)",
+      "Date and Time": "Some typical things to look our for: FIRST know BAD event, CLUSTERING of events, activities at ODD HOURS, TIME GAPS between events. these can be useful to refer to when incidents have happened and would like to make a timeline of events to deduce what the process was like. Good to look for patterns as it can indicate malicious tasks being scheduled to keep malware persistent. While looking at the timeline and you notice the order of logs are looking off, it could indicate that it has been tampered with.",
+      "Source": "Unfamiliar or misspelled sources should raise concerns, especially if there are multiple events from those same suspicious sources. New or unknown sources appearing only after suspected infection could indicate that the machine has been compromised.",
+      "Event ID": "Unique ID that is assigned to a specific event. A good way to make use of this is to create filters to view Event IDs of a high-risk event to narrow down their search. Remember to always look at the 'Source' as well as the same Event ID number could appear across different sources and could mean different things!",
+      "Task Category": "A sub-classification within a source to describe the nature of the event. Some common ones affected by malware can include: Account Lockout, Policy Change, Service Installed, Process Creation.",
+      "General/Details": "The General tab shows a human readable summary of an event. It contains Event ID and keywords, the action that occured and key parameters. The Details tab shows raw XML or structured data for the event which can be useful as the information came straight from the Windows log, uneditted.",
+      "Actions": "A range of actions available: open saved log, save all events as..., clear log, attatch task to this log, filter current log, find, refresh. many of these would come in handy, for example, we can export whatever present logs there are available before certain malware has been programmed to wipe the logs. or we can create custom alerts where we set an alert when a specific event happens."
     };
 
     function openToolInfo(toolName) {

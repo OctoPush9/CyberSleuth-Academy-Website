@@ -43,15 +43,21 @@
     </div>
   </nav>
 
-  <!-- Main Content -->
-  <h2 style="text-align:center;">VirusTotal --- --- --- notes</h2>
+ <!-- Main Content -->
+  <h2 style="text-align:center;">VirusTotal</h2>
 
+  <div class="screenshot-container">
   <img src="assets/images/phishing/virustotal.png" alt="Cybersecurity Screenshot" />
-
-  <div class="hotspot-button" style="top: 10%; left: 58%; width: 7%; height: 5%;" onclick="openToolInfo('Notes')"></div>
-  <div class="hotspot-button" style="top: 150%; left: 50%; width: 15%; height: 10%;" onclick="openToolInfo('Firewall')"></div>
-  <div class="hotspot-button" style="top: 60%; left: 30%; width: 20%; height: 12%;" onclick="openToolInfo('Antivirus')"></div>
-  <div class="hotspot-button" style="top: 85%; left: 70%; width: 20%; height: 10%;" onclick="openToolInfo('Phishing Simulation')"></div>
+  <div class="hotspot-button" style="top: 1.5%; left: 4.5%; width: 40%; height: 4.5%;" onclick="openToolInfo('Search')"></div>
+  <div class="hotspot-button" style="top: 15%; left: 71%; width: 8%; height: 5%;" onclick="openToolInfo('Reanalyze')"></div>
+  <div class="hotspot-button" style="top: 13%; left: 6%; width: 14%; height: 27%;" onclick="openToolInfo('Community Score')"></div>
+  <div class="hotspot-button" style="top: 44%; left: 6.5%; width: 7%; height: 4%;" onclick="openToolInfo('Detection')"></div>
+  <div class="hotspot-button" style="top: 44%; left: 15%; width: 6%; height: 4%;" onclick="openToolInfo('Details')"></div>
+  <div class="hotspot-button" style="top: 44%; left: 22.5%; width: 6.5%; height: 4%;" onclick="openToolInfo('Relations')"></div>
+  <div class="hotspot-button" style="top: 44%; left: 31%; width: 6.5%; height: 4%;" onclick="openToolInfo('Behavior')"></div>
+  <div class="hotspot-button" style="top: 44%; left: 39%; width: 10%; height: 4%;" onclick="openToolInfo('Community')"></div>
+  
+</div>
 
   <!-- Info Panel & Overlay -->
   <div class="overlay" id="overlay" onclick="closePanel()"></div>
@@ -77,10 +83,15 @@
     <div class="instructions-content">
       <p>Welcome to the VirusTotal simulation!</p>
       <ul>
-        <li>Hover over areas to find interactive hotspots.</li>
+        <li>Hover over areas to find the 8 interactive hotspots.</li>
         <li>Click on them to learn more about cybersecurity tools.</li>
-        <li>Use the navigation buttons below to explore more modules.</li>
+        <li>Once done, feel free to explore more tools by using the buttons near the bottom.</li>
       </ul>
+      <hr>
+      <p><strong>Try VirusTotal!</strong></p>
+      <a>Resources:</a><br>
+      <a href="https://www.virustotal.com/gui/home/upload" target="_blank" rel="noopener noreferrer">VirusTotal website</a>
+    </div>
     </div>
   </div>
 
@@ -103,10 +114,14 @@
   <!-- Core Script -->
   <script>
     const toolData = {
-      "Notes": "Try Notes",
-      "Firewall": "A firewall is a network security device that monitors and filters incoming and outgoing network traffic based on security rules.",
-      "Antivirus": "Antivirus software is designed to detect, prevent, and remove malware including viruses, worms, and trojan horses.",
-      "Phishing Simulation": "Phishing simulations help train users by mimicking real phishing attacks to improve awareness and response to threats."
+      "Search": "Always remember that best practice would be to use the file HASH rather than uploading the whole file itself, or other available methods to share to check if what you have on hand is malicious or not. (The content of whatever you upload will be accessible by anyone within the Community 👀)",
+      "Reanalyze": "It wouldn't hurt to hit 'Reanalyze' if you see that the file has been scanned awhile ago!",
+      "Community Score": "A quick way to see what others think about the artefact you just scanned. The higher, the more malicious. When the number is giving you mixed feelings, reading up on 'Community' can be a great way to try and understand why they rated it that specific score.",
+      "Detection": "Lists down the Security vendors that scanned it, which detected it as malicious, and which did not.",
+      "Details": "Details about the artefact. Includes information like basic properties: hashes, file type, file size. Other names the malware goes by, date and time of when the file was created, what imports it makes use of when executed.",
+      "Relations": "Sums up other connections made by the malware, like IP addresses, contacted domains, other files that were stored within the malware, and more!",
+      "Behavior": "Tells us how the malware acts, how it affects the machine, its capabilities. It also gives us IDs in relation to the MITRE ATT&CK Framework so we can see what tactics and techniques the malware used.",
+      "Community": "A good place to read what others have to say about the artefact, though it might be empty at times..."
     };
 
     function openToolInfo(toolName) {

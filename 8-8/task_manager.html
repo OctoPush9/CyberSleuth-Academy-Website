@@ -43,15 +43,20 @@
     </div>
   </nav>
 
-  <!-- Main Content -->
-  <h2 style="text-align:center;">Task Manager --- --- --- notes</h2>
+ <!-- Main Content -->
+  <h2 style="text-align:center;">Task Manager</h2>
 
+  <div class="screenshot-container">
   <img src="assets/images/phishing/task_manager.png" alt="Cybersecurity Screenshot" />
-
-  <div class="hotspot-button" style="top: 10%; left: 60%; width: 8%; height: 5%;" onclick="openToolInfo('Notes')"></div>
-  <div class="hotspot-button" style="top: 150%; left: 50%; width: 15%; height: 10%;" onclick="openToolInfo('Firewall')"></div>
-  <div class="hotspot-button" style="top: 60%; left: 30%; width: 20%; height: 12%;" onclick="openToolInfo('Antivirus')"></div>
-  <div class="hotspot-button" style="top: 85%; left: 70%; width: 20%; height: 10%;" onclick="openToolInfo('Phishing Simulation')"></div>
+  <div class="hotspot-button" style="top: 10%; left: 1%; width: 7%; height: 4%;" onclick="openToolInfo('Application')"></div>
+  <div class="hotspot-button" style="top: 10%; left: 8%; width: 6.5%; height: 4%;" onclick="openToolInfo('Processes')"></div>
+  <div class="hotspot-button" style="top: 10%; left: 14.5%; width: 5%; height: 4%;" onclick="openToolInfo('Services')"></div>
+  <div class="hotspot-button" style="top: 10%; left: 19.5%; width: 8%; height: 4%;" onclick="openToolInfo('Performance')"></div>
+  <div class="hotspot-button" style="top: 10%; left: 27.5%; width: 7%; height: 4%;" onclick="openToolInfo('Networking')"></div>
+  <div class="hotspot-button" style="top: 10%; left: 34.5%; width: 4%; height: 4%;" onclick="openToolInfo('Users')"></div>
+  <div class="hotspot-button" style="top: 18%; left: 2.5%; width: 35%; height: 5%;" onclick="openToolInfo('Columns in Processes')"></div>
+  <div class="hotspot-button" style="top: 58%; left: 3%; width: 9%; height: 4%;" onclick="openToolInfo('Malware')"></div>
+</div>
 
   <!-- Info Panel & Overlay -->
   <div class="overlay" id="overlay" onclick="closePanel()"></div>
@@ -66,7 +71,7 @@
   <!-- Bottom Left Back Button -->
   <a href="mitigation_measures.html" class="corner-button back-button">← Go Back</a>
 
-  <!-- Right-Side Instruction Panel -->
+<!-- Right-Side Instruction Panel -->
   <div class="instructions-panel" id="instructionsPanel">
     <div class="instructions-header">
       <h4>Instructions</h4>
@@ -77,10 +82,14 @@
     <div class="instructions-content">
       <p>Welcome to the Task Manager simulation!</p>
       <ul>
-        <li>Hover over areas to find interactive hotspots.</li>
+        <li>Hover over areas to find the 3 interactive hotspots.</li>
         <li>Click on them to learn more about cybersecurity tools.</li>
-        <li>Use the navigation buttons below to explore more modules.</li>
+        <li>Once done, feel free to explore more tools by using the buttons near the bottom.</li>
       </ul>
+            <hr>
+            <a><strong>Tip:</strong></a><br>
+      <a>Ctrl + Shift + Esc would open Task Manager right away!</a><br><br>
+      <a>Note: In Windows8 and newer, the 'Networking' tab merged into 'Performance' tab, 'Applications' tab merged into 'Processes' tab.</a>
     </div>
   </div>
 
@@ -103,10 +112,14 @@
   <!-- Core Script -->
   <script>
     const toolData = {
-      "Notes": "Try Notes",
-      "Firewall": "A firewall is a network security device that monitors and filters incoming and outgoing network traffic based on security rules.",
-      "Antivirus": "Antivirus software is designed to detect, prevent, and remove malware including viruses, worms, and trojan horses.",
-      "Phishing Simulation": "Phishing simulations help train users by mimicking real phishing attacks to improve awareness and response to threats."
+      "Application": "It shows what is visibly open by the user has at the moment. This can be helpful as when there is a illegitimate pop-up, it will show up under 'Applications' and the user can decide what action to take through the use of the 'Applications' tab.",
+      "Processes": "Look out for suspicious names, abnormal CPU/Memory usage, Descriptions that seem illegitimate as these can be indicators of compromise.",
+      "Services": "Shows all services and status (stopped or running). This can help us to identify what services could potentially be malicious as the standard layout would include a 'Description' column. If that column is empty, we should look further into it. Another suspicious activity would be when critical system services are stopped, like malware trying to stop antiviruses from scanning.",
+      "Performance": "Shows real-time CPU and memory usage. helps us to identify what processes are of high usage. A common IOC is when there is a spike in CPU usage despite being idle.",
+      "Networking": "This will help to detect unusual network traffic. It can help us identify what processes are using the network, with that, if the named process 'notepad.exe' is using the network, we know there is an issue as Notepad does not make connections.",
+      "Users": "This shows all logged-in users and their processes. It will be useful to identify unauthorised logins and see if there are any hidden processes running on hidden accounts. An obvious IOC would be that there is another active session but you are the only one that is supposed to be logged in.",
+      "Columns in Processes": "These columns helps to let us sort them in an order that would be beneficial if we wish to look through the records. In this instance, sorting according to alphabetical order to find names of suspicious processes.",
+      "Malware": "A process with a name that seems suspicious. In less obvious cases, it might be a spelling error or replacement of alphabets with numbers. (Eg. svch0st.exe and csrcs.exe rather than svchost.exe and csrss.exe).",
     };
 
     function openToolInfo(toolName) {
