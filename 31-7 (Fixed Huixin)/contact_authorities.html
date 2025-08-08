@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Explore OSINT</title>
+  <title>Explore Follow Up Actions</title>
 
   <!-- Favicon & Styles -->
   <link rel="icon" href="assets/images/cybersleuth-icon.png" type="image/png">
@@ -44,13 +44,11 @@
   </nav>
 
  <!-- Main Content -->
-  <h2 style="text-align:center;">OSINT</h2>
+  <h2 style="text-align:center;">Follow Up Action</h2>
 
   <div class="screenshot-container">
-  <img src="assets/images/insider/osint.jpg" alt="Cybersecurity Screenshot" />
-  <div class="hotspot-button" style="top: 15%; left: 10%; width: 22%; height: 23%;" onclick="openToolInfo('Background')"></div>
-  <div class="hotspot-button" style="top: 90%; left: 4%; width: 44.5%; height: 3%;" onclick="openToolInfo('Location')"></div>
-  <div class="hotspot-button" style="top: 54%; left: 13%; width: 17%; height: 11%;" onclick="openToolInfo('Logos')"></div>
+  <img src="assets/images/insider/contact_authorities.png" alt="Cybersecurity Screenshot" />
+<div class="hotspot-button" style="top: 0%; left: 0%; width: 100%; height: 100%;" onclick="openToolInfo('Contact Relevant Authorities')"></div>
 </div>
 
   <!-- Info Panel & Overlay -->
@@ -62,9 +60,9 @@
   </div>
 
   <!-- Bottom Right Next Button -->
-  <a href="contact_authorities.html" class="corner-button next-button">Follow Up Actions →</a>
+  <a href="mitigation_measures_insider-threat.html" class="corner-button next-button">Mitigation Measures →</a>
   <!-- Bottom Left Back Button -->
-  <a href="home.html" class="corner-button back-button">← Go Back</a>
+  <a href="osint.html" class="corner-button back-button">← Go Back</a>
 
   <!-- Right-Side Instruction Panel -->
   <div class="instructions-panel" id="instructionsPanel">
@@ -75,15 +73,17 @@
       </button>
     </div>
     <div class="instructions-content">
-      <p>Welcome to the OSINT simulation!</p>
+      <p>Welcome to the Follow Up Actions simulation!</p>
       <ul>
-        <li>Hover over areas to find the 3 interactive hotspots.</li>
+        <li>Hover over areas to find the interactive hotspots.</li>
         <li>Click on them to learn more about cybersecurity tools.</li>
         <li>Once done, feel free to explore more tools by using the buttons near the bottom.</li>
       </ul>
         <hr> 
-        <a><strong>Resources:</strong></a><br>
-      <a href="https://osintframework.com/" target="_blank" rel="noopener noreferrer">OSINT Framework Website</a> <br>
+        <a><strong>Useful Contacts:</strong></a><br>
+      <a href="https://www.pdpc.gov.sg/contact-us" target="_blank" rel="noopener noreferrer">Personal Data Protection Commission</a> <br>
+      <a href="https://www.police.gov.sg/contact-us" target="_blank" rel="noopener noreferrer">Singapore Police Force</a> <br>
+      
     </div>
   </div>
 
@@ -106,9 +106,7 @@
   <!-- Core Script -->
   <script>
     const toolData = {
-      "Background": "Sometimes, the background can reveal information. We might be able to see street names, significant landmarks, building names. All of these are of great help to narrow down the possible locations one is located at.",
-      "Location": "Tagged locations are a huge giveaway while trying to locate someone. It can even help us to narrow down to a building, or even a specific store with a unit number at times.",
-      "Logos": "Logos can help us identify where someone might be in. We can find leads by searching where stores are located and narrow down the possible places one might be at.",
+      "Contact Relevant Authorities": "Ensure that relevant authorities are notified about the incident. Do follow company protocol for insider threats and notify the people in charge within the company. If the breach is too serious, police involvement might be needed. Formal reports for Data Breach has to be made too. HR and Legal team should be notified about this incident as well.",
     };
 
     function openToolInfo(toolName) {
