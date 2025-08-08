@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Explore Wireshark</title>
+
+  <!-- Favicon & Styles -->
+  <link rel="icon" href="assets/images/cybersleuth-icon.png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/hidden.css" />
+  <link rel="stylesheet" href="css/forensicsanalysis.css" />
+
+</head>
+
+<body class="lab-page">
+
+  <!-- Header -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div id="alertArea" class="container position-fixed top-0 start-50 translate-middle-x mt-3"
+      style="z-index: 1055; max-width: 600px;"></div>
+
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center me-4" href="index.html" target="_blank">
+        <img src="assets/images/cybersleuth-icon.png" alt="Logo" style="height: 22px;" class="me-2">
+        CyberSleuth Academy
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+        aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNavbar">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a href="home.html" class="nav-link">Dashboard</a></li>
+          <li class="nav-item"><a href="learn.html" class="nav-link">Training Zone</a></li>
+          <li class="nav-item"><a href="leaderboard.html" class="nav-link">Leaderboard</a></li>
+          <li class="nav-item"><a href="quiz.html" class="nav-link">Knowledge Battle</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <h2 style="text-align:center;">Wireshark</h2>
+
+  <div class="screenshot-container">
+  <img src="assets/images/phishing/wireshark.png" alt="Cybersecurity Screenshot" />
+  <div class="hotspot-button" style="top: 7%; left: 1%; width: 80%; height: 4%;" onclick="openToolInfo('Filter')"></div>
+  <div class="hotspot-button" style="top: 11%; left: 0%; width: 55%; height: 4%;" onclick="openToolInfo('Columns')"></div>
+  <div class="hotspot-button" style="top: 11%; left: 96%; width: 3%; height: 63%;" onclick="openToolInfo('Packet row colours')"></div>
+  <div class="hotspot-button" style="top: 74%; left: 0%; width: 50%; height: 26%;" onclick="openToolInfo('Packet Details Pane')"></div>
+  <div class="hotspot-button" style="top: 74%; left: 50%; width: 50%; height: 26%;" onclick="openToolInfo('Packet Bytes Pane')"></div>
+  <div class="hotspot-button" style="top: 37%; left: 1%; width: 80%; height: 3%;" onclick="openToolInfo('Suspicious packets')"></div>
+</div>
+
+  <!-- Info Panel & Overlay -->
+  <div class="overlay" id="overlay" onclick="closePanel()"></div>
+  <div class="info-panel" id="infoPanel">
+    <span class="close-btn" onclick="closePanel()">×</span>
+    <h3 id="panelTitle">Title</h3>
+    <p id="panelContent">Information goes here...</p>
+  </div>
+
+  <!-- Bottom Right Next Button -->
+  <a href="virustotal.html" class="corner-button next-button">Explore VirusTotal →</a>
+  <!-- Bottom Left Back Button -->
+  <a href="task_manager.html" class="corner-button back-button">← Go Back</a>
+
+  <!-- Right-Side Instruction Panel -->
+  <div class="instructions-panel" id="instructionsPanel">
+    <div class="instructions-header">
+      <h4>Instructions</h4>
+      <button class="collapse-btn" onclick="toggleInstructions()">
+        <i class="fas fa-chevron-right" id="collapseIcon"></i>
+      </button>
+    </div>
+    <div class="instructions-content">
+      <p>Welcome to the Wireshark simulation!</p>
+      <ul>
+        <li>Hover over areas to find the 6 interactive hotspots.</li>
+        <li>Click on them to learn more about its function.</li>
+        <li>Once done, feel free to explore more tools by using the buttons near the bottom.</li>
+      </ul>
+      <hr>
+      <p>*DISCLAIMER: Always get permission before scanning any network</p>
+      <hr>
+      <p><strong>Try Wireshark!</strong></p>
+      <a>Resources:</a><br>
+      <a href="https://www.wireshark.org/download.html" target="_blank" rel="noopener noreferrer">Download Wireshark (official website)</a> <br>
+      <a href="assets/files/wireshark_exercise.pcap">Wireshark Exercise Sample (.pcap)</a> <br>
+      <a href="https://www.stationx.net/wireshark-cheat-sheet/" target="_blank" rel="noopener noreferrer">Wireshark Cheatsheet</a>
+    </div> 
+  </div>
+
+  <!-- Reopen Button (hidden until panel is collapsed) -->
+  <button class="reopen-btn" id="reopenBtn" onclick="toggleInstructions()" style="display: none;">
+    <i class="fas fa-chevron-left"></i> Instructions
+  </button>
+
+  <!-- Footer -->
+  <footer class="footer mt-auto">
+    <div>
+      <p>© 2025 CyberSleuth Academy. Developed by TP Cybersecurity & Digital Forensics Students.</p>
+      <p class="mb-0">All content is for educational purposes only.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core Script -->
+  <script>
+    const toolData = {
+      "Filter": "Make use of custom filtering to help narrow down results. For example, if you wish to look out for traffic to a certain destination, you can type 'ip.dst == [destination IP address]' online sources can be great to refresh your memory on filtering syntax!",
+      "Columns": "Columns can help to simplify what results we wish to look at. It could be grouping a certain protocol together, grouping the same source IP address together, and more! We can also add or remove columns by going to Edit>Preferences>Appearance>Columns.",
+      "Packet row colours": "The default colours of packet rows help us group common types of traffic together. Each colour has its own typical meaning. Some colours are: Red - TCP reset, Black - TCP packets with problems, Light blue - TCP Traffic, Light Purple - UDP Traffic, Light Green - HTTP/other high level protocols,  Light Yellow - Windows specific traffic including SMB and NetBIOS.",
+      "Packet Details Pane" : "This pane shows information on the selected packet, click on the '>' to expand the individual content",
+      "Packet Bytes Pane": "Quick way to see what a payload says in human readable form when traffic is unencrypted, else it would appear in gibberish.",
+      "Suspicious packets": "We can select suspicious packets to further investigate, like following 'http stream' by right clicking on a packet that has suspicious activities listed in the 'Info' column of a packet containing http traffic."
+    };
+
+    function openToolInfo(toolName) {
+      const panel = document.getElementById("infoPanel");
+      const overlay = document.getElementById("overlay");
+      document.getElementById("panelTitle").textContent = toolName;
+      document.getElementById("panelContent").textContent = toolData[toolName] || "No information available.";
+      panel.style.display = "block";
+      overlay.style.display = "block";
+    }
+
+    function closePanel() {
+      document.getElementById("infoPanel").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+    }
+
+
+    
+    function toggleInstructions() {
+      const panel = document.getElementById('instructionsPanel');
+      const reopenBtn = document.getElementById('reopenBtn');
+      const icon = document.getElementById('collapseIcon');
+
+      // Toggle collapsed class on panel
+      panel.classList.toggle('collapsed');
+
+      // If panel is collapsed
+      if (panel.classList.contains('collapsed')) {
+        reopenBtn.style.display = 'block';
+      } else {
+        reopenBtn.style.display = 'none';
+      }
+
+      // Toggle icon direction
+      icon.classList.toggle('fa-chevron-right');
+      icon.classList.toggle('fa-chevron-left');
+    }
+      
+  </script>
+</body>
+</html>

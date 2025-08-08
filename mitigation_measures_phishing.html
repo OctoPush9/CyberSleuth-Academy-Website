@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Explore Mitigation Measures</title>
+
+  <!-- Favicon & Styles -->
+  <link rel="icon" href="assets/images/cybersleuth-icon.png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/hidden.css" />
+  <link rel="stylesheet" href="css/forensicsanalysis.css" />
+
+</head>
+
+<body class="lab-page">
+
+  <!-- Header -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div id="alertArea" class="container position-fixed top-0 start-50 translate-middle-x mt-3"
+      style="z-index: 1055; max-width: 600px;"></div>
+
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center me-4" href="index.html" target="_blank">
+        <img src="assets/images/cybersleuth-icon.png" alt="Logo" style="height: 22px;" class="me-2">
+        CyberSleuth Academy
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+        aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNavbar">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a href="home.html" class="nav-link">Dashboard</a></li>
+          <li class="nav-item"><a href="learn.html" class="nav-link">Training Zone</a></li>
+          <li class="nav-item"><a href="leaderboard.html" class="nav-link">Leaderboard</a></li>
+          <li class="nav-item"><a href="quiz.html" class="nav-link">Knowledge Battle</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+ <!-- Main Content -->
+  <h2 style="text-align:center;">Mitigation Measures</h2>
+
+  <div class="screenshot-container">
+  <img src="assets/images/phishing/mitigation_measures.png" alt="Cybersecurity Screenshot" />
+  <div class="hotspot-button" style="top: 0%; left: 0%; width: 50%; height: 50%;" onclick="openToolInfo('Isolate Device')"></div>
+  <div class="hotspot-button" style="top: 0%; left: 50%; width:50%; height: 50%;" onclick="openToolInfo('Password Hygiene')"></div>
+  <div class="hotspot-button" style="top: 50%; left: 0%; width: 50%; height: 50%;" onclick="openToolInfo('Multifactor Authentication')"></div>
+  <div class="hotspot-button" style="top: 50%; left: 50%; width: 50%; height: 50%;" onclick="openToolInfo('Antivirus Scan')"></div>
+</div>
+
+  <!-- Info Panel & Overlay -->
+  <div class="overlay" id="overlay" onclick="closePanel()"></div>
+  <div class="info-panel" id="infoPanel">
+    <span class="close-btn" onclick="closePanel()">×</span>
+    <h3 id="panelTitle">Title</h3>
+    <p id="panelContent">Information goes here...</p>
+  </div>
+
+    <!-- Bottom Right Next Button -->
+  <a href="home.html" class="corner-button next-button">END</a>
+  <!-- Bottom Left Back Button -->
+  <a href="virustotal.html" class="corner-button back-button">← Go Back</a>
+
+  <!-- Right-Side Instruction Panel -->
+  <div class="instructions-panel" id="instructionsPanel">
+    <div class="instructions-header">
+      <h4>Instructions</h4>
+      <button class="collapse-btn" onclick="toggleInstructions()">
+        <i class="fas fa-chevron-right" id="collapseIcon"></i>
+      </button>
+    </div>
+    <div class="instructions-content">
+      <p>Welcome to the Mitigation Measures section!</p>
+      <ul>
+        <li>Hover over areas to find the 4 interactive hotspots.</li>
+        <li>Click on them to learn more about cybersecurity tools.</li>
+        <li>Once done, feel free to explore more tools by using the buttons near the bottom.</li>
+      </ul>
+            <hr>
+      <p><strong>Resources:</strong></p>
+      <a href="https://www.csa.gov.sg/alerts-and-advisories/advisories/ad-2022-008/" target="_blank" rel="noopener noreferrer">CSA Password Safeguarding Tips</a><br>
+      <a href="https://www.cisa.gov/secure-our-world/use-strong-passwords" target="_blank" rel="noopener noreferrer">CISA Password Hygiene Tips</a>
+    </div>
+  </div>
+
+  <!-- Reopen Button (hidden until panel is collapsed) -->
+  <button class="reopen-btn" id="reopenBtn" onclick="toggleInstructions()" style="display: none;">
+    <i class="fas fa-chevron-left"></i> Instructions
+  </button>
+
+  <!-- Footer -->
+  <footer class="footer mt-auto">
+    <div>
+      <p>© 2025 CyberSleuth Academy. Developed by TP Cybersecurity & Digital Forensics Students.</p>
+      <p class="mb-0">All content is for educational purposes only.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core Script -->
+  <script>
+    const toolData = {
+      "Isolate Device": "Disconnect the device from the internet so that it is not able to communicate with other devices available on the internet. This prevents further spread of the malware if it possible for lateral movement to take place. If you would like to investigate, monitor live network traffic: ensure that it is properly contained, in a segmented network, where internet is only available through a monitored gateway. Access control lists can be used to block connections to other subnets. All these can be done to minimise and prevent spread to other devices. Following the principle of Zero Trust and Least Privilege Access will also help with containing the spread of malware across the network.",
+      "Password Hygiene": "For a strong password, a MINIMUM of 12 characters is needed with a mix of UPPER and LOWER case alphabets, NUMBERS as well as SYMBOLS. In addition, passwords should not be repeated across all accounts in possession. With that, using a credible password manager would be helpful. Do note that using long but easy to remember passwords is not beneficial as someone could crack '1234567abcdefg!!' rather easily. Personal information that can be readily obtained should not be used as well, this includes names, NRIC, birthdate and more. Do remember to reset ALL passwords once you have been compromised especially if you have reused the password for the different accounts and enable MFA to further strengthen your accounts' login safety. \nTip: using a passphrase of 4 to 7 random mix of words will make it easier to reach a higher character count for your password, the longer the better!",
+      "Multifactor Authentication": "Multifactor authentication will lower the chances of unauthorised logins as the attackers would require a second layer of authentication that they might not have in posession to log in into your account. Methods like using a one-time passwords from physical OTP tokens or smartphones, biometrics like fingerprints or facial/voice recognition would be very hard to obtain and replicate, attackers will then be unsucessful at gaining access to accounts.",
+      "Antivirus Scan": "Do a scan using the provided antivirus made available to you or use Windows Defender if there is none available. This will help with detecting and will also attempt to remove the malicious files in your device. If possible, try to scan suspicious documents before opening them to help reduce chnaces of running malware. You and also attempt to find out if the document is malicious through using VirusTotal but do enusre to comply with best practices to prevent exposing personal data or sensitive content. "
+    };
+
+    function openToolInfo(toolName) {
+      const panel = document.getElementById("infoPanel");
+      const overlay = document.getElementById("overlay");
+      document.getElementById("panelTitle").textContent = toolName;
+      document.getElementById("panelContent").textContent = toolData[toolName] || "No information available.";
+      panel.style.display = "block";
+      overlay.style.display = "block";
+    }
+
+    function closePanel() {
+      document.getElementById("infoPanel").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+    }
+
+
+    
+    function toggleInstructions() {
+      const panel = document.getElementById('instructionsPanel');
+      const reopenBtn = document.getElementById('reopenBtn');
+      const icon = document.getElementById('collapseIcon');
+
+      // Toggle collapsed class on panel
+      panel.classList.toggle('collapsed');
+
+      // If panel is collapsed
+      if (panel.classList.contains('collapsed')) {
+        reopenBtn.style.display = 'block';
+      } else {
+        reopenBtn.style.display = 'none';
+      }
+
+      // Toggle icon direction
+      icon.classList.toggle('fa-chevron-right');
+      icon.classList.toggle('fa-chevron-left');
+    }
+      
+  </script>
+</body>
+</html>
