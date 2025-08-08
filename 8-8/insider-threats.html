@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,6 +59,19 @@
                         <a href="quiz.html" class="nav-link">Knowledge Battle</a>
                     </li>
                 </ul>
+
+                <!-- Right Tools -->
+                <ul class="navbar-nav ms-auto align-items-center gap-3">
+                    <!-- Search -->
+                    <li class="nav-item">
+                        <form class="d-flex align-items-center" role="search">
+                            <input type="text"
+                                class="form-control form-control-sm bg-dark text-white border border-secondary me-2"
+                                placeholder="Search" aria-label="Search">
+                            <button type="submit" id="searchBtn" class="btn btn-outline-success btn-sm">Search</button>
+                        </form>
+                    </li>
+
 
                     <!-- Settings Dropdown (only shows if body.lab-page is present) -->
                     <li class="nav-item dropdown settings-dropdown d-none">
@@ -325,6 +337,17 @@
     <script src="js/insider-threats-tasks.js"></script>
     <script src="js/libs/jspdf.umd.min.js"></script>
     <script src="js/main.js"></script>
+
+    <!-- Search Result Navigation Controls -->
+    <div id="searchNavControls"
+        class="position-fixed bottom-0 end-0 m-3 p-2 bg-light border rounded shadow d-none z-1050"
+        style="min-width: 160px;">
+        <div class="d-flex justify-content-between align-items-center mb-1">
+            <button class="btn btn-sm btn-outline-secondary" id="prevResult">&lt;</button>
+            <span id="searchResultCounter" class="mx-2 small">0 of 0</span>
+            <button class="btn btn-sm btn-outline-secondary" id="nextResult">&gt;</button>
+        </div>
+    </div>
 </body>
 
 </html>
